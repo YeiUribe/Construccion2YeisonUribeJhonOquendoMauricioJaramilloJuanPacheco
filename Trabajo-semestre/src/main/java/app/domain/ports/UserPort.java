@@ -11,4 +11,6 @@ public interface UserPort {
     User findByUsername(String username);
 
     boolean existsByUsername(String username);
+    
+    void deleteByDocumentNumber(String documentNumber);
 }
