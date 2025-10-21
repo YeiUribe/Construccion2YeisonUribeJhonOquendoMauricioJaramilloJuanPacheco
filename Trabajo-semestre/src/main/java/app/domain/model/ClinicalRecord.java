@@ -7,6 +7,7 @@ public class ClinicalRecord {
     private Patient patient;
     private User doctor;
     private LocalDate recordDate;
+    private PatientVitals vitals;
     private String reasonForVisit;
     private String symptoms;
     private String diagnosis;
@@ -15,7 +16,6 @@ public class ClinicalRecord {
     public ClinicalRecord() {
     }
 
-    // Getters y Setters
     public Patient getPatient() {
         return patient;
     }
@@ -38,6 +38,14 @@ public class ClinicalRecord {
 
     public void setRecordDate(LocalDate recordDate) {
         this.recordDate = recordDate;
+    }
+
+    public PatientVitals getVitals() {
+        return vitals;
+    }
+
+    public void setVitals(PatientVitals vitals) {
+        this.vitals = vitals;
     }
 
     public String getReasonForVisit() {
