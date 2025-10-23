@@ -1,4 +1,4 @@
-package app.infrastructure.persistence.respository;
+package app.infrastructure.persistence.repository;
 
 import app.infrastructure.persistence.entities.InsuranceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

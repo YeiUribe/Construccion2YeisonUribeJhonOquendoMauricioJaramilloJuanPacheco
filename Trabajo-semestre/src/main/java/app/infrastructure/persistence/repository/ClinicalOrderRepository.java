@@ -1,4 +1,4 @@
-package app.infrastructure.persistence.respository;
+package app.infrastructure.persistence.repository;
 
 import app.infrastructure.persistence.entities.ClinicalOrderEntity;
 import app.infrastructure.persistence.entities.PatientEntity;
