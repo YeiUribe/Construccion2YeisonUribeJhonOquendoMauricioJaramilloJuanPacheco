@@ -1,60 +1,38 @@
 package app.adapter.in.builder;
 
+import app.adapter.in.validators.InvoiceValidator;
+import app.adapter.in.validators.PatientValidator;
+import app.adapter.in.validators.UserValidator;
 import app.domain.model.Invoice;
 import app.domain.model.Patient;
 import app.domain.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
+@Component
 public class InvoiceBuilder {
-    private long id;
-    private LocalDate issueDate;
-    private Patient patient;
-    private User doctor;
-    private double totalAmount;
-    private double copayAmount;
 
-    public static InvoiceBuilder builder() {
-        return new InvoiceBuilder();
-    }
+    @Autowired
+    private InvoiceValidator invoiceValidator;
+    @Autowired
+    private PatientValidator patientValidator;
+    @Autowired
+    private UserValidator userValidator;
 
-    public InvoiceBuilder withId(long id) {
-        this.id = id;
-        return this;
-    }
+    public Invoice build(String patientId, String doctorId) throws Exception {
 
-    public InvoiceBuilder withIssueDate(LocalDate issueDate) {
-        this.issueDate = issueDate;
-        return this;
-    }
+        Patient patient = new Patient();
+        patient.setIdentificationNumber(patientValidator.documentValidator(patientId));
 
-    public InvoiceBuilder withPatient(Patient patient) {
-        this.patient = patient;
-        return this;
-    }
+        User doctor = new User();
+        doctor.setDocumentNumber(userValidator.documentValidator(doctorId));
 
-    public InvoiceBuilder withDoctor(User doctor) {
-        this.doctor = doctor;
-        return this;
-    }
-
-    public InvoiceBuilder withTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
-        return this;
-    }
-
-    public InvoiceBuilder withCopayAmount(double copayAmount) {
-        this.copayAmount = copayAmount;
-        return this;
-    }
-
-    public Invoice build() {
         Invoice invoice = new Invoice();
-        invoice.setId(id);
-        invoice.setIssueDate(issueDate);
         invoice.setPatient(patient);
         invoice.setDoctor(doctor);
-        invoice.setTotalAmount(totalAmount);
-        invoice.setCopayAmount(copayAmount);
+        invoice.setIssueDate(LocalDate.now());
+
         return invoice;
     }
-}
+}   

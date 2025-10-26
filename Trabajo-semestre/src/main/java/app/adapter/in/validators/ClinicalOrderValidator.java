@@ -1,8 +1,8 @@
-package app.adapter.validators;
+package app.adapter.in.validators;
 
 import org.springframework.stereotype.Component;
 
-import com.clinic.adapter.in.validator.SimpleValidator;
+import app.adapter.in.validators.SimpleValidator;
 
 import app.domain.model.ClinicalOrder;
 import app.domain.model.Patient;

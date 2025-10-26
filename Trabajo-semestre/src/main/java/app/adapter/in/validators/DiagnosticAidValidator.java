@@ -1,4 +1,4 @@
-package app.adapter.validators;
+package app.adapter.in.validators;
 
 public class DiagnosticAidValidator {
     

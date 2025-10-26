@@ -1,6 +1,6 @@
 package app.adapter.in.builder;
 
-import app.adapter.validators.InsuranceValidator;
+import app.adapter.in.validators.InsuranceValidator;
 import app.domain.model.Insurance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
