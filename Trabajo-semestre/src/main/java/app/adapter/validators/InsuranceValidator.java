@@ -1,13 +1,16 @@
 package app.adapter.validators;
 
 import org.springframework.stereotype.Component;
+
+import com.clinic.adapter.in.validator.SimpleValidator;
+
 import java.time.LocalDate;
 
 @Component
 public class InsuranceValidator extends SimpleValidator {
 
     public String companyNameValidator(String value) throws Exception {
-        return stringValidator("Nombre de la compañía de seguros", value, 100);
+        return stringValidator("Nombre de la compañía de seguros", value, 0);
     }
 
     public String policyNumberValidator(String value) throws Exception {

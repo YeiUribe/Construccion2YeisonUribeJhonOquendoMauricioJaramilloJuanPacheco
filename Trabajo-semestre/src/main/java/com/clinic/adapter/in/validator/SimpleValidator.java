@@ -1,6 +1,5 @@
 package com.clinic.adapter.in.validator;
 
-import app.application.exceptions.BusinessException;
 import app.application.exceptions.InputsException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +7,7 @@ import java.util.regex.Pattern;
 
 public abstract class SimpleValidator {
 
-    public String stringValidator(String element, String value) throws Exception {
+    public String stringValidator(String element, String value, int i) throws Exception {
         if (value == null || value.equals("")) {
             throw new InputsException(element + " no puede tener un valor vacío o nulo.");
         }
@@ -16,7 +15,7 @@ public abstract class SimpleValidator {
     }
 
     public int integerValidator(String element, String value) throws Exception {
-        stringValidator(element, value);
+        stringValidator(element, value, 0);
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
@@ -25,7 +24,7 @@ public abstract class SimpleValidator {
     }
 
     public long longValidator(String element, String value) throws Exception {
-        stringValidator(element, value);
+        stringValidator(element, value, 0);
         try {
             return Long.parseLong(value);
         } catch (NumberFormatException e) {
@@ -33,7 +32,7 @@ public abstract class SimpleValidator {
         }
     }
     public double doubleValidator(String element, String value) throws Exception {
-        stringValidator(element, value);
+        stringValidator(element, value, 0);
         try {
             double doubleValue = Double.parseDouble(value);
             if (doubleValue < 0) {
@@ -46,7 +45,7 @@ public abstract class SimpleValidator {
     }
     
     public boolean booleanValidator(String element, String value) throws Exception {
-        stringValidator(element, value);
+        stringValidator(element, value, 0);
         if (!value.equalsIgnoreCase("true") && !value.equalsIgnoreCase("false")) {
             throw new InputsException(element + " debe ser 'true' o 'false'.");
         }
@@ -54,7 +53,7 @@ public abstract class SimpleValidator {
     }
 
     public LocalDate dateValidator(String element, String value) throws Exception {
-        stringValidator(element, value);
+        stringValidator(element, value, 0);
         try {
             return LocalDate.parse(value, DateTimeFormatter.ISO_LOCAL_DATE); // Formato YYYY-MM-DD
         } catch (Exception e) {
@@ -63,10 +62,20 @@ public abstract class SimpleValidator {
     }
     
     public String emailValidator(String element, String value) throws Exception {
-        stringValidator(element, value);
+        stringValidator(element, value, 0);
         if (!Pattern.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$", value)) {
             throw new InputsException(element + " no es un formato de email válido.");
         }
         return value;
     }
+
+	public String emailValidator(String value) throws InputsException, Exception {
+		
+		return null;
+	}
+
+	public LocalDate dateValidator(String value) throws InputsException, Exception {
+		
+		return null;
+	}
 }

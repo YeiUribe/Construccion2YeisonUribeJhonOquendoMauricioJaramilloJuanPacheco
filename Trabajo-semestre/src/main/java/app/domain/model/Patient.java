@@ -89,4 +89,9 @@ public class Patient {
     public void setInsurance(Insurance insurance) {
         this.insurance = insurance;
     }
+
+	public String trim() {
+		
+		return null;
+	}
 }
