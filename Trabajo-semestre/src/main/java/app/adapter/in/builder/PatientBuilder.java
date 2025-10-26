@@ -1,4 +1,4 @@
-package app.adapter.in.builder;
+package app.adapter.in.builder; 
 
 import app.adapter.validators.PatientValidator;
 import app.adapter.validators.InsuranceValidator;

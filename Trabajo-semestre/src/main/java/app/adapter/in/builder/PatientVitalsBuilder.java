@@ -1,59 +1,34 @@
 package app.adapter.in.builder;
 
-import app.domain.model.PatientVitals;
+import app.adapter.validators.PatientVitalsValidator;
+import app.adapter.validators.PatientValidator;
 import app.domain.model.Patient;
+import app.domain.model.PatientVitals;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 
+@Component
 public class PatientVitalsBuilder {
-    private Patient patient;
-    private LocalDateTime recordTimestamp;
-    private String bloodPressure;
-    private double temperature;
-    private int pulse;
-    private double oxygenLevel;
 
-    public static PatientVitalsBuilder builder() {
-        return new PatientVitalsBuilder();
-    }
+    @Autowired
+    private PatientVitalsValidator vitalsValidator;
+    @Autowired
+    private PatientValidator patientValidator;
 
-    public PatientVitalsBuilder withPatient(Patient patient) {
-        this.patient = patient;
-        return this;
-    }
+    public PatientVitals build(String patientId, String bloodPressure, String temperature, String pulse, String oxygenLevel) throws Exception {
+        
+        Patient patient = new Patient();
+        patient.setIdentificationNumber(patientValidator.documentValidator(patientId));
 
-    public PatientVitalsBuilder withRecordTimestamp(LocalDateTime recordTimestamp) {
-        this.recordTimestamp = recordTimestamp;
-        return this;
-    }
-
-    public PatientVitalsBuilder withBloodPressure(String bloodPressure) {
-        this.bloodPressure = bloodPressure;
-        return this;
-    }
-
-    public PatientVitalsBuilder withTemperature(double temperature) {
-        this.temperature = temperature;
-        return this;
-    }
-
-    public PatientVitalsBuilder withPulse(int pulse) {
-        this.pulse = pulse;
-        return this;
-    }
-
-    public PatientVitalsBuilder withOxygenLevel(double oxygenLevel) {
-        this.oxygenLevel = oxygenLevel;
-        return this;
-    }
-
-    public PatientVitals build() {
-        PatientVitals patientVitals = new PatientVitals();
-        patientVitals.setPatient(patient);
-        patientVitals.setRecordTimestamp(recordTimestamp);
-        patientVitals.setBloodPressure(bloodPressure);
-        patientVitals.setTemperature(temperature);
-        patientVitals.setPulse(pulse);
-        patientVitals.setOxygenLevel(oxygenLevel);
-        return patientVitals;
+        PatientVitals vitals = new PatientVitals();
+        vitals.setPatient(patient);
+        vitals.setBloodPressure(vitalsValidator.stringValidator(bloodPressure));
+        vitals.setTemperature(vitalsValidator.doubleValidator(temperature));
+        vitals.setPulse(vitalsValidator.integerValidator(pulse));
+        vitals.setOxygenLevel(vitalsValidator.doubleValidator(oxygenLevel));
+        vitals.setRecordTimestamp(LocalDateTime.now());
+        
+        return vitals;
     }
 }
