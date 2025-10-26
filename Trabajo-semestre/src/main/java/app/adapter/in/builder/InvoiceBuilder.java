@@ -9,6 +9,7 @@ import app.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class InvoiceBuilder {
@@ -31,7 +32,12 @@ public class InvoiceBuilder {
         Invoice invoice = new Invoice();
         invoice.setPatient(patient);
         invoice.setDoctor(doctor);
-        invoice.setIssueDate(LocalDate.now());
+        
+        LocalDate today = LocalDate.now();
+        
+        String dateAsString = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        
+        invoice.setIssueDate(dateAsString);
 
         return invoice;
     }

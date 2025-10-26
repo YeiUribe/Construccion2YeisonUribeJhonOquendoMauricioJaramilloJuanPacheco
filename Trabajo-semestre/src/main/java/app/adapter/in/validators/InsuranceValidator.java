@@ -1,32 +1,25 @@
 package app.adapter.in.validators;
 
+import app.application.exceptions.InputsException;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InsuranceValidator extends SimpleValidator {
 
-    public String companyNameValidator(String value) throws Exception {
-        
-        return super.stringValidator("Nombre de la compañía de seguros", value);
-    }
-
     public long idValidator(String value) throws Exception {
-        
-        return super.longValidator("ID de Aseguradora", value);
+        return longValidator("ID de Aseguradora", value);
     }
 
-    public String nameValidator(String value) throws Exception {
-        
-        return super.stringValidator("Nombre de Aseguradora", value);
+    public String stringValidator(String value) throws Exception {
+        return stringValidator("Nombre de Aseguradora", value);
     }
-
+    
     public String phoneValidator(String value) throws Exception {
-        
-        return super.stringValidator("Teléfono de Aseguradora", value);
+        // Asume una validación simple de teléfono, se puede ajustar
+        return stringValidator("Teléfono de Aseguradora", value);
     }
 
-    public boolean stateValidator(String value) throws Exception {
-        
+    public boolean booleanValidator(String value) throws Exception {
         return super.booleanValidator("Estado de Aseguradora", value);
     }
 }
