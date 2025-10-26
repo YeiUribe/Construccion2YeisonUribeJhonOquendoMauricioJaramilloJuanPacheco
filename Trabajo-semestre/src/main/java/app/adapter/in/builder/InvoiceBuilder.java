@@ -32,13 +32,13 @@ public class InvoiceBuilder {
         Invoice invoice = new Invoice();
         invoice.setPatient(patient);
         invoice.setDoctor(doctor);
-        
+
         LocalDate today = LocalDate.now();
-        
+
         String dateAsString = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
-        
+
         invoice.setIssueDate(dateAsString);
 
         return invoice;
     }
-}   
+}

@@ -1,11 +1,9 @@
 package app.domain.model;
 
-import java.util.Date;
-
 public class Invoice {
 
     private String id;
-    private Date issueDate;
+    private String issueDate;
     private Patient patient;
     private User doctor;
     private String totalAmount;
@@ -23,11 +21,11 @@ public class Invoice {
         this.id = id;
     }
 
-    public Date getIssueDate() {
+    public String getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(Date issueDate) {
+    public void setIssueDate(String issueDate) {
         this.issueDate = issueDate;
     }
 
