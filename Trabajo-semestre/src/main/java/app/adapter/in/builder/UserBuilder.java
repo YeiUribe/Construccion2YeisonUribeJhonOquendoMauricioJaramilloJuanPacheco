@@ -16,7 +16,7 @@ public class UserBuilder {
                       String username, String password) throws Exception {
         
         User user = new User();
-        user.setDocumentNumber(userValidator.identificationValidator(documentNumber));
+        user.setDocumentNumber(userValidator.documentValidator(documentNumber));
         user.setFullName(userValidator.stringValidator(fullName));
         user.setEmail(userValidator.emailValidator(email));
         user.setPhoneNumber(userValidator.phoneValidator(phoneNumber));
