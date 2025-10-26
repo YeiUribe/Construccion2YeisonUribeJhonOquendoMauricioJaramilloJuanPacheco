@@ -1,5 +1,11 @@
 package app.adapter.validators;
 
-public class ClinicalRecordValidator {
+import org.springframework.stereotype.Component;
+
+@Component
+public class ClinicalRecordValidator extends SimpleValidator {
     
+    public String stringValidator(String element, String value) throws Exception {
+        return stringValidator("Campo de Historia Clínica (" + element + ")", value);
+    }
 }
