@@ -1,50 +1,39 @@
 package app.adapter.validators;
 
+import app.application.exceptions.InputsException;
 import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 
 @Component
 public class PatientValidator extends SimpleValidator {
+    
+    public String documentValidator(String value) throws Exception {
+        return stringValidator("Cédula del Paciente", value);
+    }
+    
+    public String stringValidator(String value) throws Exception {
+        return stringValidator("Campo de texto", value);
+    }
 
-    public String fullNameValidator(String value) throws Exception {
-        return stringValidator("Nombre completo del paciente", value, 100);
-    }
-
-    public String identificationValidator(String value) throws Exception {
-        stringValidator("Identificación del paciente", value, 20);
-        if (!value.matches("^\\d{1,20}$")) {
-            throw new Exception("La identificación debe contener solo números");
+   
+    public LocalDate dateValidator(String value) throws Exception {
+        LocalDate date = super.dateValidator("Fecha de Nacimiento", value);
+        if (date.isAfter(LocalDate.now())) {
+            throw new InputsException("La fecha de nacimiento no puede ser en el futuro.");
         }
-        return value;
-    }
-    
-    public LocalDate birthDateValidator(LocalDate value) throws Exception {
-        if (value == null) {
-            throw new Exception("La fecha de nacimiento no puede estar vacía");
-        }
-        if (value.isAfter(LocalDate.now())) {
-            throw new Exception("La fecha de nacimiento no puede ser futura");
-        }
-        return value;
-    }
-    
-    public String genderValidator(String value) throws Exception {
-        return stringValidator("Género", value, 20);
-    }
-    
-    public String addressValidator(String value) throws Exception {
-        return stringValidator("Dirección", value, 200);
+        return date;
     }
     
     public String phoneValidator(String value) throws Exception {
-        stringValidator("Teléfono", value, 10);
-        if (!value.matches("^\\d{1,10}$")) {
-            throw new Exception("El teléfono debe contener entre 1 y 10 dígitos");
+        long phone = longValidator("Número de Teléfono", value);
+        if (String.valueOf(phone).length() > 10) {
+            throw new InputsException("Número de Teléfono no puede tener más de 10 dígitos.");
         }
-        return value;
+        return String.valueOf(phone);
     }
-    
+
+
     public String emailValidator(String value) throws Exception {
-        return emailValidator(value);
+        return super.emailValidator("Correo Electrónico", value);
     }
 }

@@ -1,4 +1,4 @@
-package com.clinic.adapter.in.validator;
+package app.adapter.validators;
 
 import app.application.exceptions.InputsException;
 import java.time.LocalDate;

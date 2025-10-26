@@ -1,33 +1,35 @@
 package app.adapter.validators;
 
 import org.springframework.stereotype.Component;
+<<<<<<< HEAD
 
 import com.clinic.adapter.in.validator.SimpleValidator;
 
 import java.time.LocalDate;
+=======
+>>>>>>> ca9889c6d5e2429ae86ef56a096593ab7ce50fbb
 
 @Component
 public class InsuranceValidator extends SimpleValidator {
 
+<<<<<<< HEAD
     public String companyNameValidator(String value) throws Exception {
         return stringValidator("Nombre de la compañía de seguros", value, 0);
+=======
+    public long idValidator(String value) throws Exception {
+        return longValidator("ID de Aseguradora", value);
+>>>>>>> ca9889c6d5e2429ae86ef56a096593ab7ce50fbb
     }
 
-    public String policyNumberValidator(String value) throws Exception {
-        return stringValidator("Número de póliza", value, 50);
+    public String stringValidator(String value) throws Exception {
+        return stringValidator("Nombre de Aseguradora", value);
     }
     
-    public String statusValidator(String value) throws Exception {
-        return stringValidator("Estado de la póliza", value, 20);
+    public String phoneValidator(String value) throws Exception {
+        return stringValidator("Teléfono de Aseguradora", value);
     }
-    
-    public LocalDate expirationDateValidator(LocalDate value) throws Exception {
-        if (value == null) {
-            throw new Exception("La fecha de vencimiento de la póliza no puede estar vacía");
-        }
-        if (value.isBefore(LocalDate.now())) {
-            throw new Exception("La fecha de vencimiento no puede ser anterior a la fecha actual");
-        }
-        return value;
+
+    public boolean booleanValidator(String value) throws Exception {
+        return super.booleanValidator("Estado de Aseguradora", value);
     }
 }
