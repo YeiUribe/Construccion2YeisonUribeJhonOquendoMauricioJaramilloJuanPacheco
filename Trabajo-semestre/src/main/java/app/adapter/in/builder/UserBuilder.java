@@ -1,4 +1,4 @@
-package com.clinic.adapter.in.builder;
+package app.adapter.in.builder;
 
 import app.adapter.validators.UserValidator;
 import app.domain.model.User;
@@ -16,7 +16,7 @@ public class UserBuilder {
                       String username, String password) throws Exception {
         
         User user = new User();
-        user.setDocumentNumber(userValidator.identificationValidator(documentNumber));
+        user.setDocumentNumber(userValidator.documentValidator(documentNumber));
         user.setFullName(userValidator.stringValidator(fullName));
         user.setEmail(userValidator.emailValidator(email));
         user.setPhoneNumber(userValidator.phoneValidator(phoneNumber));

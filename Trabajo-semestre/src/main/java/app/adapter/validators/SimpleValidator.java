@@ -1,6 +1,5 @@
-package com.clinic.adapter.in.validator;
+package app.adapter.validators;
 
-import app.application.exceptions.BusinessException;
 import app.application.exceptions.InputsException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
