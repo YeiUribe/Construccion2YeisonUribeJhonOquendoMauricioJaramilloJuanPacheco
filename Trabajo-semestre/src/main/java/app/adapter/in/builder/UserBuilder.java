@@ -1,4 +1,4 @@
-package com.clinic.adapter.in.builder;
+package app.adapter.in.builder;
 
 import app.adapter.validators.UserValidator;
 import app.domain.model.User;
