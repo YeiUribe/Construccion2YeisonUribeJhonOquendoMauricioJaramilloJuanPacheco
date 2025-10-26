@@ -1,8 +1,10 @@
 package app.adapter.validators;
 
-import app.application.exceptions.InputsException;
-import org.springframework.stereotype.Component;
 import java.time.LocalDate;
+
+import org.springframework.stereotype.Component;
+
+import app.application.exceptions.InputsException;
 
 @Component
 public class PatientValidator extends SimpleValidator {

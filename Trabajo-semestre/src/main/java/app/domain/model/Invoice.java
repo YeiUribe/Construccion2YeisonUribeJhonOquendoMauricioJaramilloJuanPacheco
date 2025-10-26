@@ -7,7 +7,7 @@ public class Invoice {
     private Patient patient;
     private User doctor;
     private String totalAmount;
-    private int copayAmount;
+    private String copayAmount;
 
     public Invoice() {
     }
@@ -17,16 +17,16 @@ public class Invoice {
         return id;
     }
 
-    public void setId(String string) {
-        this.id = string;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(String string) {
-        this.issueDate = string;
+    public void setIssueDate(String issueDate) {
+        this.issueDate = issueDate;
     }
 
     public Patient getPatient() {
@@ -49,17 +49,16 @@ public class Invoice {
         return totalAmount;
     }
 
-    public void setTotalAmount(String string) {
-        this.totalAmount = string;
+    public void setTotalAmount(String totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
-    public int getCopayAmount() {
+    public String getCopayAmount() {
         return copayAmount;
     }
 
-    public void setCopayAmount(int i) {
-        this.copayAmount = i;
+    public void setCopayAmount(String copayAmount) {
+        this.copayAmount = copayAmount;
     }
-
-
 }
+

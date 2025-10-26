@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CalculateInactivePolicyPayment {
 
-    public String execute(String string) {
-        return string;
+    public double execute(double d) {
+        return d;
     }
 }
