@@ -1,17 +1,16 @@
 package app.adapter.validators;
 
-import org.springframework.stereotype.Component;
-
-import com.clinic.adapter.in.validator.SimpleValidator;
-
-import app.domain.model.ClinicalOrder;
-import app.domain.model.Patient;
-import app.domain.model.User;
-import app.domain.model.Medication;
-import app.domain.model.Procedure;
-import app.domain.model.DiagnosticAid;
 import java.time.LocalDate;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import app.domain.model.ClinicalOrder;
+import app.domain.model.DiagnosticAid;
+import app.domain.model.Medication;
+import app.domain.model.Patient;
+import app.domain.model.Procedure;
+import app.domain.model.User;
 
 @Component
 public class ClinicalOrderValidator extends SimpleValidator {

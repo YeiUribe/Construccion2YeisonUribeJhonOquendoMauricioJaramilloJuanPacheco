@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserBuilder {
-
+	
     @Autowired
     private UserValidator userValidator;
 
@@ -17,7 +17,7 @@ public class UserBuilder {
         
         User user = new User();
         user.setDocumentNumber(userValidator.documentValidator(documentNumber));
-        user.setFullName(userValidator.stringValidator(fullName));
+        user.setFullName(userValidator.stringValidator(fullName, password));
         user.setEmail(userValidator.emailValidator(email));
         user.setPhoneNumber(userValidator.phoneValidator(phoneNumber));
         user.setBirthDate(userValidator.dateValidator(birthDate));
