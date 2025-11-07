@@ -1,6 +1,6 @@
 package app.adapter.in.builder;
 
-import app.adapter.validators.UserValidator;
+import app.adapter.in.validators.UserValidator;
 import app.domain.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package app.adapter.validators;
+package app.adapter.in.validators;
 
 import java.time.LocalDate;
 import org.springframework.stereotype.Component;

@@ -1,71 +1,40 @@
 package app.adapter.in.builder;
 
+import app.adapter.in.validators.PatientValidator;
+import app.adapter.in.validators.UserValidator;
 import app.domain.model.ClinicalOrder;
 import app.domain.model.Patient;
 import app.domain.model.User;
-import app.domain.model.Medication;
-import app.domain.model.Procedure;
-import app.domain.model.DiagnosticAid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
 
+@Component
 public class ClinicalOrderBuilder {
-    private long id;
-    private Patient patient;
-    private User doctor;
-    private LocalDate creationDate;
-    private List<Medication> medications;
-    private List<Procedure> procedures;
-    private List<DiagnosticAid> diagnosticAids;
 
-    public static ClinicalOrderBuilder builder() {
-        return new ClinicalOrderBuilder();
-    }
+    @Autowired
+    private PatientValidator patientValidator;
+    @Autowired
+    private UserValidator userValidator;
 
-    public ClinicalOrderBuilder withId(long id) {
-        this.id = id;
-        return this;
-    }
+    public ClinicalOrder build(String patientId, String doctorId) throws Exception {
 
-    public ClinicalOrderBuilder withPatient(Patient patient) {
-        this.patient = patient;
-        return this;
-    }
+        Patient patient = new Patient();
+        patient.setIdentificationNumber(patientValidator.documentValidator(patientId));
 
-    public ClinicalOrderBuilder withDoctor(User doctor) {
-        this.doctor = doctor;
-        return this;
-    }
+        User doctor = new User();
+        doctor.setDocumentNumber(userValidator.documentValidator(doctorId));
 
-    public ClinicalOrderBuilder withCreationDate(LocalDate creationDate) {
-        this.creationDate = creationDate;
-        return this;
-    }
+        ClinicalOrder order = new ClinicalOrder();
+        order.setPatient(patient);
+        order.setDoctor(doctor);
+        order.setCreationDate(LocalDate.now());
 
-    public ClinicalOrderBuilder withMedications(List<Medication> medications) {
-        this.medications = medications;
-        return this;
-    }
+        order.setMedications(new ArrayList<>());
+        order.setProcedures(new ArrayList<>());
+        order.setDiagnosticAids(new ArrayList<>());
 
-    public ClinicalOrderBuilder withProcedures(List<Procedure> procedures) {
-        this.procedures = procedures;
-        return this;
-    }
-
-    public ClinicalOrderBuilder withDiagnosticAids(List<DiagnosticAid> diagnosticAids) {
-        this.diagnosticAids = diagnosticAids;
-        return this;
-    }
-
-    public ClinicalOrder build() {
-        ClinicalOrder clinicalOrder = new ClinicalOrder();
-        clinicalOrder.setId(id);
-        clinicalOrder.setPatient(patient);
-        clinicalOrder.setDoctor(doctor);
-        clinicalOrder.setCreationDate(creationDate);
-        clinicalOrder.setMedications(medications);
-        clinicalOrder.setProcedures(procedures);
-        clinicalOrder.setDiagnosticAids(diagnosticAids);
-        return clinicalOrder;
+        return order;
     }
 }

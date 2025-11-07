@@ -1,8 +1,8 @@
 package app.adapter.in.builder;
 
-import app.adapter.validators.PatientValidator;
-import app.adapter.validators.UserValidator;
-import app.adapter.validators.ClinicalRecordValidator;
+import app.adapter.in.validators.PatientValidator;
+import app.adapter.in.validators.UserValidator;
+import app.adapter.in.validators.ClinicalRecordValidator;
 import app.domain.model.ClinicalRecord;
 import app.domain.model.Patient;
 import app.domain.model.User;

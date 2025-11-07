@@ -1,7 +1,7 @@
 package app.adapter.in.builder; 
 
-import app.adapter.validators.PatientValidator;
-import app.adapter.validators.InsuranceValidator;
+import app.adapter.in.validators.PatientValidator;
+import app.adapter.in.validators.InsuranceValidator;
 import app.domain.model.EmergencyContact;
 import app.domain.model.Insurance;
 import app.domain.model.Patient;

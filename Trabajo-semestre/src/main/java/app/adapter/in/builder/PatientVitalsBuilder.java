@@ -1,7 +1,7 @@
 package app.adapter.in.builder;
 
-import app.adapter.validators.PatientVitalsValidator;
-import app.adapter.validators.PatientValidator;
+import app.adapter.in.validators.PatientVitalsValidator;
+import app.adapter.in.validators.PatientValidator;
 import app.domain.model.Patient;
 import app.domain.model.PatientVitals;
 import org.springframework.beans.factory.annotation.Autowired;

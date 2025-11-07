@@ -1,10 +1,15 @@
-package app.adapter.validators;
+package app.adapter.in.validators;
 
 import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+<<<<<<< HEAD:Trabajo-semestre/src/main/java/app/adapter/validators/ClinicalOrderValidator.java
+=======
+import app.adapter.in.validators.SimpleValidator;
+
+>>>>>>> e952e0b9f9bf90d3bafda8b327f13905e8038d52:Trabajo-semestre/src/main/java/app/adapter/in/validators/ClinicalOrderValidator.java
 import app.domain.model.ClinicalOrder;
 import app.domain.model.DiagnosticAid;
 import app.domain.model.Medication;
