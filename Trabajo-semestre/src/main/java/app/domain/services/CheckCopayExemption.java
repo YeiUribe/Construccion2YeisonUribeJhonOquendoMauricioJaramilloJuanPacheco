@@ -1,11 +1,13 @@
 package app.domain.services;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import app.domain.model.Invoice;
 import app.domain.model.Patient;
 import app.domain.ports.InvoicePort;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class CheckCopayExemption {
