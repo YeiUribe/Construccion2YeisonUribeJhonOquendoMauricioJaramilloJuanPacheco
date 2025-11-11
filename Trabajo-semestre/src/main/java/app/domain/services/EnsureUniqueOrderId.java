@@ -10,7 +10,7 @@ public class EnsureUniqueOrderId {
     @Autowired
     private ClinicalOrderPort clinicalOrderPort;
 
-    public void execute(long orderId) {
+    public void execute(long orderId) throws Exception {
         if (clinicalOrderPort.findById(orderId) != null) {
             throw new IllegalStateException("El ID de la orden clínica ya existe.");
         }

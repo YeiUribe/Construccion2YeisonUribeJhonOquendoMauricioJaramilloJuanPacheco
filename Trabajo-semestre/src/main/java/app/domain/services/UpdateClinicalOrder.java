@@ -11,7 +11,7 @@ public class UpdateClinicalOrder {
     @Autowired
     private ClinicalOrderPort clinicalOrderPort;
 
-    public ClinicalOrder execute(ClinicalOrder order) {
+    public ClinicalOrder execute(ClinicalOrder order) throws Exception {
         if (clinicalOrderPort.findById(order.getId()) == null) {
             throw new IllegalStateException("Cannot update an order that does not exist.");
         }

@@ -5,11 +5,11 @@ import java.util.List;
 
 public interface ProcedurePort {
 
-    void save(Procedure procedure);
+    void save(Procedure procedure) throws Exception;
 
-    Procedure findById(long id);
+    Procedure findById(long id) throws Exception;
 
-    List<Procedure> findAll();
+    List<Procedure> findAll() throws Exception;
     
-    Procedure findByName(String name);
+    Procedure findByName(String name) throws Exception;
 }

@@ -17,7 +17,7 @@ public class HumanResourcesUseCase {
     @Autowired
     private UpdateStaffInfo updateStaffInfo;
 
-    public User hireStaff(User newStaffMember, Role role) {
+    public User hireStaff(User newStaffMember, Role role) throws Exception {
         newStaffMember.setRole(role);
         return createUser.execute(newStaffMember);
     }
@@ -26,7 +26,7 @@ public class HumanResourcesUseCase {
         deleteUser.execute(documentNumber);
     }
 
-    public User updateStaffInformation(User updatedUserData) {
+    public User updateStaffInformation(User updatedUserData)throws Exception {
         return updateStaffInfo.execute(updatedUserData);
     }
 }

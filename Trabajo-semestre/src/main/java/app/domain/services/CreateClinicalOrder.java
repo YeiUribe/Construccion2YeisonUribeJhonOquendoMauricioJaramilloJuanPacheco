@@ -11,7 +11,7 @@ public class CreateClinicalOrder {
     @Autowired
     private ClinicalOrderPort clinicalOrderPort;
 
-    public ClinicalOrder execute(ClinicalOrder order) {
+    public ClinicalOrder execute(ClinicalOrder order) throws Exception {
         clinicalOrderPort.save(order);
         return order;
     }

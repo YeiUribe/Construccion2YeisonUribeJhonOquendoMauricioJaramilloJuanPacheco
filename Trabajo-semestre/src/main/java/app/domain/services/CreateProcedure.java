@@ -11,7 +11,7 @@ public class CreateProcedure {
     @Autowired
     private ProcedurePort procedurePort;
 
-    public Procedure execute(Procedure procedure) {
+    public Procedure execute(Procedure procedure) throws Exception {
         
         if (procedurePort.findByName(procedure.getName()) != null) {
             throw new IllegalStateException("Ya existe un procedimiento con el nombre: " + procedure.getName());

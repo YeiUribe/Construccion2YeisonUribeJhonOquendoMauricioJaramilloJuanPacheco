@@ -5,11 +5,11 @@ import java.util.List;
 
 public interface DiagnosticAidPort {
 
-    void save(DiagnosticAid diagnosticAid);
+    void save(DiagnosticAid diagnosticAid) throws Exception;
 
-    DiagnosticAid findById(long id);
+    DiagnosticAid findById(long id) throws Exception;
 
-    List<DiagnosticAid> findAll();
+    List<DiagnosticAid> findAll() throws Exception;
     
-    DiagnosticAid findByName(String name);
+    DiagnosticAid findByName(String name) throws Exception;
 }

@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DiagnosticAidRepository extends JpaRepository<DiagnosticAidEntity, Long> {
+
+	DiagnosticAidEntity findByName(String name);
 }

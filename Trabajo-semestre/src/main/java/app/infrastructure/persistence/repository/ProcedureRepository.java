@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProcedureRepository extends JpaRepository<ProcedureEntity, Long> {
+	ProcedureEntity findByName(String name);
 }

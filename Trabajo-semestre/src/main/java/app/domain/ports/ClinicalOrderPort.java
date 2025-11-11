@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface ClinicalOrderPort {
 
-    void save(ClinicalOrder order);
+    void save(ClinicalOrder order) throws Exception;
 
-    ClinicalOrder findById(long id);
+    ClinicalOrder findById(long id) throws Exception;
 
-    List<ClinicalOrder> findByPatient(Patient patient);
+    List<ClinicalOrder> findByPatient(Patient patient) throws Exception;
 }

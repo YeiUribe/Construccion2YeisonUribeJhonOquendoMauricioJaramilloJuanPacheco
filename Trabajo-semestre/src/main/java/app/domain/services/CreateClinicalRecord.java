@@ -11,7 +11,7 @@ public class CreateClinicalRecord {
     @Autowired
     private ClinicalRecordPort clinicalRecordPort;
 
-    public ClinicalRecord execute(ClinicalRecord record) {
+    public ClinicalRecord execute(ClinicalRecord record) throws Exception {
         clinicalRecordPort.save(record);
         return record;
     }

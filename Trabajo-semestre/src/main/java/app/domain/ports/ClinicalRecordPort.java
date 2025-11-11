@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ClinicalRecordPort {
 
-    void save(ClinicalRecord record);
+    void save(ClinicalRecord record) throws Exception;
 
-    List<ClinicalRecord> findByPatient(Patient patient);
+    List<ClinicalRecord> findByPatient(Patient patient) throws Exception;
 }

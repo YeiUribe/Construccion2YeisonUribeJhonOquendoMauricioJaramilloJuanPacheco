@@ -11,7 +11,7 @@ public class CreateDiagnosticAid {
     @Autowired
     private DiagnosticAidPort diagnosticAidPort;
 
-    public DiagnosticAid execute(DiagnosticAid diagnosticAid) {
+    public DiagnosticAid execute(DiagnosticAid diagnosticAid) throws Exception {
        
         if (diagnosticAidPort.findByName(diagnosticAid.getName()) != null) {
             throw new IllegalStateException("Ya existe una ayuda diagnóstica con el nombre: " + diagnosticAid.getName());

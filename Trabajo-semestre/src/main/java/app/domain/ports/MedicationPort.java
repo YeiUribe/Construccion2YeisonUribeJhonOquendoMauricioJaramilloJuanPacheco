@@ -5,11 +5,11 @@ import java.util.List;
 
 public interface MedicationPort {
 
-    void save(Medication medication);
+    void save(Medication medication) throws Exception;
 
-    Medication findById(long id);
+    Medication findById(long id) throws Exception;
 
-    List<Medication> findAll();
+    List<Medication> findAll() throws Exception;
     
-    Medication findByName(String name);
+    Medication findByName(String name) throws Exception;
 }

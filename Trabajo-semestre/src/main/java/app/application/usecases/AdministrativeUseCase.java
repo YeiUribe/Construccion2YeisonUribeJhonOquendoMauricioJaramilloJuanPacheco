@@ -28,7 +28,7 @@ public class AdministrativeUseCase {
     @Autowired
     private CalculateInactivePolicyPayment calculateInactivePolicyPayment;
 
-    public Patient registerNewPatient(Patient patient) {
+    public Patient registerNewPatient(Patient patient) throws Exception {
         return registerPatient.execute(patient);
     }
 

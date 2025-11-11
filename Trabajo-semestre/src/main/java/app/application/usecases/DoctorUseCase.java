@@ -38,12 +38,12 @@ public class DoctorUseCase {
     @Autowired
     private UpdateClinicalOrder updateClinicalOrder;
 
-    public ClinicalRecord createNewClinicalRecord(ClinicalRecord record, PatientVitals vitals) {
+    public ClinicalRecord createNewClinicalRecord(ClinicalRecord record, PatientVitals vitals) throws Exception {
         record.setVitals(vitals);
         return createClinicalRecord.execute(record);
     }
     
-    public ClinicalOrder createNewClinicalOrder(ClinicalOrder order) {
+    public ClinicalOrder createNewClinicalOrder(ClinicalOrder order) throws Exception {
         ensureUniqueOrderId.execute(order.getId());
         validateDiagnosticAidOrder.execute(order);
         validateOrderItemUniqueness.execute(order);
@@ -51,7 +51,7 @@ public class DoctorUseCase {
         return createClinicalOrder.execute(order);
     }
 
-    public ClinicalOrder manageHospitalization(ClinicalOrder order, Procedure hospitalizationDetails) {
+    public ClinicalOrder manageHospitalization(ClinicalOrder order, Procedure hospitalizationDetails) throws Exception {
         defineHospitalizationAsProcedure.execute(order, hospitalizationDetails);
         return updateClinicalOrder.execute(order);
     }

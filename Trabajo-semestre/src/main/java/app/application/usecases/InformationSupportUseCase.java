@@ -26,15 +26,15 @@ public class InformationSupportUseCase {
     @Autowired
     private CreateInsurance createInsurance; 
 
-    public Medication createMedication(Medication medication) {
+    public Medication createMedication(Medication medication) throws Exception {
         return createMedication.execute(medication);
     }
 
-    public Procedure createProcedure(Procedure procedure) {
+    public Procedure createProcedure(Procedure procedure) throws Exception {
         return createProcedure.execute(procedure);
     }
     
-    public DiagnosticAid createDiagnosticAid(DiagnosticAid diagnosticAid) {
+    public DiagnosticAid createDiagnosticAid(DiagnosticAid diagnosticAid) throws Exception {
         return createDiagnosticAid.execute(diagnosticAid);
     }
     

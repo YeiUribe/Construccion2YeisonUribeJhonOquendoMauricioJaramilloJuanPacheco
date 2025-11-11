@@ -4,7 +4,7 @@ import app.domain.model.Patient;
 
 public interface PatientPort {
 
-    void save(Patient patient);
+    void save(Patient patient) throws Exception;
 
-    Patient findByIdentificationNumber(String identificationNumber);
+    Patient findByIdentificationNumber(String identificationNumber) throws Exception;
 }

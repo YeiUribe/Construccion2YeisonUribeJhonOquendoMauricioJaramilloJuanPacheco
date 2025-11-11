@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface InvoicePort {
 
-    void save(Invoice invoice);
+    void save(Invoice invoice) throws Exception;
 
-    Invoice findById(long id);
+    Invoice findById(long id) throws Exception;
 
-    List<Invoice> findByPatient(Patient patient);
+    List<Invoice> findByPatient(Patient patient) throws Exception;
 }
