@@ -10,4 +10,6 @@ public interface MedicationPort {
     Medication findById(long id);
 
     List<Medication> findAll();
+    
+    Medication findByName(String name);
 }

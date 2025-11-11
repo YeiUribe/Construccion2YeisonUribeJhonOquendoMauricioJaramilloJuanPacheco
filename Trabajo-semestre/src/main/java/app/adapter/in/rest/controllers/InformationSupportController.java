@@ -33,7 +33,7 @@ public class InformationSupportController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(
                 informationSupportUseCase.createMedication(
-                    medicationBuilder.build(request)
+                    medicationBuilder.build(request.getName(), request.getCost())
                 )
             );
         } catch (InputsException e) {
@@ -48,7 +48,7 @@ public class InformationSupportController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(
                 informationSupportUseCase.createProcedure(
-                    procedureBuilder.build(request)
+                    procedureBuilder.build(request.getName(), request.getCost())
                 )
             );
         } catch (InputsException e) {
@@ -63,7 +63,7 @@ public class InformationSupportController {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(
                 informationSupportUseCase.createDiagnosticAid(
-                    diagnosticAidBuilder.build(request)
+                    diagnosticAidBuilder.build(request.getName(), request.getCost())
                 )
             );
         } catch (InputsException e) {
@@ -78,7 +78,11 @@ public class InformationSupportController {
         try {
              return ResponseEntity.status(HttpStatus.CREATED).body(
                  informationSupportUseCase.createInsurance(
-                     insuranceBuilder.build(request)
+                     insuranceBuilder.build(
+                         request.getCompanyName(), 
+                         request.getContactNumber(), 
+                         String.valueOf(request.isActive()) // Convierte boolean a String para el builder
+                     )
                  )
              );
         } catch (InputsException e) {

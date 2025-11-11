@@ -19,7 +19,7 @@ public class CheckCopayExemption {
         List<Invoice> pastInvoices = invoicePort.findByPatient(patient);
         double yearlyCopayTotal = pastInvoices.stream()
                 .filter(inv -> inv.getIssueDate().getYear() == year)
-                .mapToDouble(Invoice::getCopayAmount)
+                .flatMapToDouble(Invoice::getCopayAmount)
                 .sum();
 
         return yearlyCopayTotal >= 1000000;

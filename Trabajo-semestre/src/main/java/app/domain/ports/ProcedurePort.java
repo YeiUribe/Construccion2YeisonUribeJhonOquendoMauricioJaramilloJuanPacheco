@@ -10,4 +10,6 @@ public interface ProcedurePort {
     Procedure findById(long id);
 
     List<Procedure> findAll();
+    
+    Procedure findByName(String name);
 }

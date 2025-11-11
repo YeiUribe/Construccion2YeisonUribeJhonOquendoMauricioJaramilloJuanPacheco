@@ -10,4 +10,6 @@ public interface DiagnosticAidPort {
     DiagnosticAid findById(long id);
 
     List<DiagnosticAid> findAll();
+    
+    DiagnosticAid findByName(String name);
 }
