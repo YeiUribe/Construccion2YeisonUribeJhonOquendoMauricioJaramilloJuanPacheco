@@ -12,6 +12,7 @@ public class CreateClinicalOrder {
     private ClinicalOrderPort clinicalOrderPort;
 
     public ClinicalOrder execute(ClinicalOrder order) {
-        return clinicalOrderPort.save(order);
+        clinicalOrderPort.save(order);
+        return order;
     }
 }

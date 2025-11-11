@@ -15,6 +15,7 @@ public class UpdateClinicalOrder {
         if (clinicalOrderPort.findById(order.getId()) == null) {
             throw new IllegalStateException("Cannot update an order that does not exist.");
         }
-        return clinicalOrderPort.save(order);
+        clinicalOrderPort.save(order);
+        return order;
     }
 }

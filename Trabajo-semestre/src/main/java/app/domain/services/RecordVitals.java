@@ -13,6 +13,7 @@ public class RecordVitals {
 
     public PatientVitals execute(PatientVitals vitals) throws Exception {
         System.out.println("Guardando signos vitales del paciente: " + vitals.getPatient().getFullName());
-        return patientVitalsPort.save(vitals);
+        patientVitalsPort.save(vitals);
+        return vitals;
     }
 }

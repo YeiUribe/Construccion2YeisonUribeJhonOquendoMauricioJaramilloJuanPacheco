@@ -12,6 +12,7 @@ public class CreateClinicalRecord {
     private ClinicalRecordPort clinicalRecordPort;
 
     public ClinicalRecord execute(ClinicalRecord record) {
-        return clinicalRecordPort.save(record);
+        clinicalRecordPort.save(record);
+        return record;
     }
 }

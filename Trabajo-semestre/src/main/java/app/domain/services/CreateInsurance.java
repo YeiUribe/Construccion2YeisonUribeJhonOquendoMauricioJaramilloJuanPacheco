@@ -15,6 +15,7 @@ public class CreateInsurance {
         if (insurancePort.findByCompanyName(insurance.getCompanyName()) != null) {
             throw new IllegalStateException("Ya existe una aseguradora con el nombre: " + insurance.getCompanyName());
         }
-        return insurancePort.save(insurance);
+        insurancePort.save(insurance);
+        return insurance;
     }
 }

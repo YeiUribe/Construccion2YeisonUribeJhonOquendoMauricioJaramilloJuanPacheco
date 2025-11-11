@@ -15,6 +15,7 @@ public class RegisterPatient {
         if (patientPort.findByIdentificationNumber(patient.getIdentificationNumber()) != null) {
             throw new IllegalStateException("El paciente con este número de identificación ya existe.");
         }
-        return patientPort.save(patient);
+        patientPort.save(patient);
+        return patient;
     }
 }

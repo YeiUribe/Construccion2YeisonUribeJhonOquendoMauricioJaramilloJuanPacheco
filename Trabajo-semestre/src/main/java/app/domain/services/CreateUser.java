@@ -18,6 +18,7 @@ public class CreateUser {
         if (userPort.existsByUsername(user.getUsername())) {
             throw new IllegalStateException("El nombre de usuario ya existe.");
         }
-        return userPort.save(user);
+        userPort.save(user);
+        return user;
     }
 }

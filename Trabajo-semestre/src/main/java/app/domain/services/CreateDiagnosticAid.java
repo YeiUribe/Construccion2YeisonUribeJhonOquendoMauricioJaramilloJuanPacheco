@@ -16,6 +16,7 @@ public class CreateDiagnosticAid {
         if (diagnosticAidPort.findByName(diagnosticAid.getName()) != null) {
             throw new IllegalStateException("Ya existe una ayuda diagnóstica con el nombre: " + diagnosticAid.getName());
         }
-        return diagnosticAidPort.save(diagnosticAid);
+        diagnosticAidPort.save(diagnosticAid);
+        return diagnosticAid;
     }
 }

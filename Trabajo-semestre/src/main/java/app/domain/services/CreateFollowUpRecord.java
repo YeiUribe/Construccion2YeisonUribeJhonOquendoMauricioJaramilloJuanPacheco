@@ -12,6 +12,7 @@ public class CreateFollowUpRecord {
     private ClinicalRecordPort clinicalRecordPort;
 
     public ClinicalRecord execute(ClinicalRecord followUpRecord) {
-        return clinicalRecordPort.save(followUpRecord);
+        clinicalRecordPort.save(followUpRecord);
+        return followUpRecord;
     }
 }

@@ -15,6 +15,7 @@ public class CreateMedication {
         if (medicationPort.findByName(medication.getName()) != null) {
             throw new IllegalStateException("Ya existe un medicamento con el nombre: " + medication.getName());
         }
-        return medicationPort.save(medication);
+        medicationPort.save(medication);
+        return medication;
     }
 }

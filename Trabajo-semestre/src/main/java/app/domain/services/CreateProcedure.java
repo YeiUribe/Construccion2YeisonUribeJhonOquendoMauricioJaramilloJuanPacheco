@@ -16,6 +16,7 @@ public class CreateProcedure {
         if (procedurePort.findByName(procedure.getName()) != null) {
             throw new IllegalStateException("Ya existe un procedimiento con el nombre: " + procedure.getName());
         }
-        return procedurePort.save(procedure);
+        procedurePort.save(procedure);
+        return procedure;
     }
 }
