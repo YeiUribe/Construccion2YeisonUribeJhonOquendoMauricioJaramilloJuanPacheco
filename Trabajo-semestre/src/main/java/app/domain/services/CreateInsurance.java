@@ -11,7 +11,7 @@ public class CreateInsurance {
     @Autowired
     private InsurancePort insurancePort;
 
-    public Insurance execute(Insurance insurance) throws Exception { // <-- Añadir throws Exception
+    public Insurance execute(Insurance insurance) throws Exception { 
         if (insurancePort.findByCompanyName(insurance.getCompanyName()) != null) {
             throw new IllegalStateException("Ya existe una aseguradora con el nombre: " + insurance.getCompanyName());
         }

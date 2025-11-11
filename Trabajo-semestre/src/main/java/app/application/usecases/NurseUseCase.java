@@ -11,7 +11,7 @@ public class NurseUseCase {
     @Autowired
     private RecordVitals recordVitals;
 
-    public PatientVitals recordPatientVitals(PatientVitals vitals) {
+    public PatientVitals recordPatientVitals(PatientVitals vitals) throws Exception {
         return recordVitals.execute(vitals);
     }
 }

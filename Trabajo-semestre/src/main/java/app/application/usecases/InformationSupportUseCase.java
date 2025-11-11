@@ -24,7 +24,7 @@ public class InformationSupportUseCase {
     private CreateDiagnosticAid createDiagnosticAid;
     
     @Autowired
-    private CreateInsurance createInsurance; // <-- 1. Añade esta inyección
+    private CreateInsurance createInsurance; 
 
     public Medication createMedication(Medication medication) {
         return createMedication.execute(medication);
@@ -38,8 +38,8 @@ public class InformationSupportUseCase {
         return createDiagnosticAid.execute(diagnosticAid);
     }
     
-    // --- 2. Añade este método ---
-    public Insurance createInsurance(Insurance insurance) {
+
+    public Insurance createInsurance(Insurance insurance) throws Exception {
         return createInsurance.execute(insurance);
     }
 }
