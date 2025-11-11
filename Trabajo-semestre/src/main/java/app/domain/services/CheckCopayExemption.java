@@ -18,7 +18,6 @@ public class CheckCopayExemption {
         
         double yearlyCopayTotal = pastInvoices.stream()
             .filter(inv -> inv.getIssueDate().getYear() == year)
-            // 2. Cambiado flatMapToDouble por mapToDouble
             .mapToDouble(Invoice::getCopayAmount) 
             .sum();
             

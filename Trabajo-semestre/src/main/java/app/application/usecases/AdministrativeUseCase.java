@@ -32,7 +32,7 @@ public class AdministrativeUseCase {
         return registerPatient.execute(patient);
     }
 
-    public Invoice generateInvoice(Invoice invoice) {
+    public Invoice generateInvoice(Invoice invoice) throws Exception {
         
         LocalDate issueDate = invoice.getIssueDate();
         int year = issueDate.getYear();
