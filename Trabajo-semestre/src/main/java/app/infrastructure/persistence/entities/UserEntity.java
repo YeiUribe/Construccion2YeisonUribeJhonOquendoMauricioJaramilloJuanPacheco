@@ -1,5 +1,5 @@
 package app.infrastructure.persistence.entities;
-
+ 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,125 +8,123 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
+ 
 @Entity
-@Table(name = "user")
+@Table(name = "User")
 public class UserEntity {
-
+ 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "User_id")
     private long userId;
-
-    @Column(name = "nombre_completo", nullable = false, length = 100)
-    private String nombreCompleto;
-
-    @Column(name = "cedula", nullable = false, unique = true, length = 10)
-    private String cedula;
-
-    @Column(name = "correo", nullable = false, unique = true, length = 100)
-    private String correo;
-
-    @Column(name = "telefono", nullable = false, length = 10)
-    private String telefono;
-
-    @Column(name = "fecha_nacimiento", nullable = false, length = 20)
-    private String fechaNacimiento;
-
-    @Column(name = "direccion", nullable = false, length = 100)
-    private String direccion;
-
+ 
+    @Column(name = "Nombre_completo", nullable = false, length = 100)
+    private String fullName;
+ 
+    @Column(name = "Cedula", nullable = false, unique = true, length = 10)
+    private String documentNumber;
+ 
+    @Column(name = "Correo", nullable = false, unique = true, length = 100)
+    private String email;
+ 
+    @Column(name = "Telefono", nullable = false, length = 10)
+    private String phoneNumber;
+ 
+    @Column(name = "Fecha_nacimiento", nullable = false, length = 20)
+    private String birthDate;
+ 
+    @Column(name = "Direccion", nullable = false, length = 100)
+    private String adress;
+ 
     @Enumerated(EnumType.STRING)
-    @Column(name = "rol", nullable = false, length = 30)
-    private Rol rol;
-
-    
+    @Column(name = "Rol", nullable = false, length = 30)
+    private Rol role;
+ 
     public enum Rol {
-        RECURSOS_HUMANOS,
-        ADMINISTRATIVO,
-        SOPORTE_INFORMACION,
-        ENFERMERA,
-        MEDICO
+        HUMAN_RESOURCES,
+        ADMINISTRATIVE_STAFF,
+        INFORMATION_SUPPORT,
+        NURSE,
+        DOCTOR
     }
-
-   
+ 
     public UserEntity() {
     }
-
-    public UserEntity(long userId, String nombreCompleto, String cedula, String correo,
-                      String telefono, String fechaNacimiento, String direccion, Rol rol) {
+ 
+    public UserEntity(long userId, String fullName, String documentNumber, String email, String phoneNumber, String birthDate, String adress, Rol role) {
         this.userId = userId;
-        this.nombreCompleto = nombreCompleto;
-        this.cedula = cedula;
-        this.correo = correo;
-        this.telefono = telefono;
-        this.fechaNacimiento = fechaNacimiento;
-        this.direccion = direccion;
-        this.rol = rol;
+        this.fullName = fullName;
+        this.documentNumber = documentNumber;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.birthDate = birthDate;
+        this.adress = adress;
+        this.role = role;
     }
-
-  
+ 
     public long getUserId() {
         return userId;
     }
-
+ 
     public void setUserId(long userId) {
         this.userId = userId;
     }
-
-    public String getNombreCompleto() {
-        return nombreCompleto;
+ 
+    public String getFullName() {
+        return fullName;
     }
-
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
+ 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
-
-    public String getCedula() {
-        return cedula;
+ 
+    public String getDocumentNumber() {
+        return documentNumber;
     }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
+ 
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
     }
-
-    public String getCorreo() {
-        return correo;
+ 
+    public String getEmail() {
+        return email;
     }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
+ 
+    public void setEmail(String email) {
+        this.email = email;
     }
-
-    public String getTelefono() {
-        return telefono;
+ 
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+ 
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
-
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
+ 
+    public String getBirthDate() {
+        return birthDate;
     }
-
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+ 
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
     }
-
-    public String getDireccion() {
-        return direccion;
+ 
+    public String getAdress() {
+        return adress;
     }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+ 
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
-
-    public Rol getRol() {
-        return rol;
+ 
+    public Rol getRole() {
+        return role;
     }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
+ 
+    public void setRole(Rol role) {
+        this.role = role;
     }
+ 
+    
 }
