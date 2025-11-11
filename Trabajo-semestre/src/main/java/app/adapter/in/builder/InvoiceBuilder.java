@@ -35,9 +35,9 @@ public class InvoiceBuilder {
 
         LocalDate today = LocalDate.now();
 
-        String dateAsString = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        //String dateAsString = today.format(DateTimeFormatter.ISO_LOCAL_DATE);
 
-        invoice.setIssueDate(dateAsString);
+        invoice.setIssueDate(today);
 
         return invoice;
     }

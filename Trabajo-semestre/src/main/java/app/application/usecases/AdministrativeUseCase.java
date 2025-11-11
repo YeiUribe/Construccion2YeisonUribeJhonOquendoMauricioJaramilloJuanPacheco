@@ -34,22 +34,22 @@ public class AdministrativeUseCase {
 
     public Invoice generateInvoice(Invoice invoice) {
         
-        LocalDate issueDate = LocalDate.parse(invoice.getIssueDate(), DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate issueDate = invoice.getIssueDate();
         int year = issueDate.getYear();
 
         boolean isExempt = checkCopayExemption.isExempt(invoice.getPatient(), year);
 
         if (isExempt) {
-            invoice.setCopayAmount("0");
+            invoice.setCopayAmount(0);
         } else if (invoice.getPatient().getInsurance() != null &&
                    invoice.getPatient().getInsurance().isActive()) {
             double copay = calculateActivePolicyCopay.execute();
-            invoice.setCopayAmount(String.valueOf(copay));
+            invoice.setCopayAmount(copay);
         } else {
             double copay = calculateInactivePolicyPayment.execute(
-                Double.parseDouble(invoice.getTotalAmount())
+                invoice.getTotalAmount()
             );
-            invoice.setCopayAmount(String.valueOf(copay));
+            invoice.setCopayAmount(copay);
         }
 
         return invoice;

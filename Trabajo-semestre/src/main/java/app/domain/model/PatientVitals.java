@@ -4,15 +4,21 @@ import java.time.LocalDateTime;
 
 public class PatientVitals {
 
+	private long id;
     private Patient patient;
     private LocalDateTime recordTimestamp;
     private String bloodPressure;
     private double temperature;
     private int pulse;
     private double oxygenLevel;
+    
+    
 
     public PatientVitals() {
     }
+    
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
 
     public Patient getPatient() {
         return patient;

@@ -4,6 +4,7 @@ import app.domain.model.enums.Specialty;
 
 public class Procedure {
 
+	private long id;
     private int itemNumber;
     private String name;
     private int repetitionCount;
@@ -16,6 +17,10 @@ public class Procedure {
     }
 
     // Getters y Setters
+    
+    public long getId() { return id; } 
+    public void setId(long id) { this.id = id; }
+    
     public int getItemNumber() {
         return itemNumber;
     }

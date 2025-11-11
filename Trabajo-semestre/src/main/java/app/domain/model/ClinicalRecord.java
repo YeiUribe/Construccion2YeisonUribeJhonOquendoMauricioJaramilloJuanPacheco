@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class ClinicalRecord {
 
+	private long id;
     private Patient patient;
     private User doctor;
     private LocalDate recordDate;
@@ -13,8 +14,13 @@ public class ClinicalRecord {
     private String diagnosis;
     private ClinicalOrder clinicalOrder;
 
+    
+    
     public ClinicalRecord() {
     }
+    
+    public long getId() { return id; } 
+    public void setId(long id) { this.id = id; }
 
     public Patient getPatient() {
         return patient;

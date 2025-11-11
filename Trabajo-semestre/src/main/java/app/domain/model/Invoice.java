@@ -1,31 +1,33 @@
 package app.domain.model;
 
+import java.time.LocalDate;
+
 public class Invoice {
 
-    private String id;
-    private String issueDate;
+    private long id;
+    private LocalDate issueDate;
     private Patient patient;
     private User doctor;
-    private String totalAmount;
-    private String copayAmount;
+    private double totalAmount;
+    private double copayAmount;
 
     public Invoice() {
     }
 
     // Getters y Setters
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id2) {
-        this.id = id2;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getIssueDate() {
+    public LocalDate getIssueDate() {
         return issueDate;
     }
 
-    public void setIssueDate(String issueDate) {
+    public void setIssueDate(LocalDate issueDate) {
         this.issueDate = issueDate;
     }
 
@@ -45,19 +47,19 @@ public class Invoice {
         this.doctor = doctor;
     }
 
-    public String getTotalAmount() {
+    public double getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(String totalAmount) {
+    public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public String getCopayAmount() {
+    public double getCopayAmount() {
         return copayAmount;
     }
 
-    public void setCopayAmount(String copayAmount) {
+    public void setCopayAmount(double copayAmount) {
         this.copayAmount = copayAmount;
     }
 }
