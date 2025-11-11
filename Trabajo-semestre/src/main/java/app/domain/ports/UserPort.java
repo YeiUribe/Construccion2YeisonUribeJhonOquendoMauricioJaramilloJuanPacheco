@@ -4,7 +4,7 @@ import app.domain.model.User;
 
 public interface UserPort {
 
-    User save(User user);
+    void save(User user);
 
     User findByDocumentNumber(String documentNumber);
 

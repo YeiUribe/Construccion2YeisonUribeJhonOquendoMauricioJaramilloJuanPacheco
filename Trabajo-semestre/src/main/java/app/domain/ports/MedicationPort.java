@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface MedicationPort {
 
-    Medication save(Medication medication);
+    void save(Medication medication);
 
     Medication findById(long id);
 

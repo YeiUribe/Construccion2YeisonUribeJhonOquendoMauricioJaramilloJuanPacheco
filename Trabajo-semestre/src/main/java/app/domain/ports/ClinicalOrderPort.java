@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ClinicalOrderPort {
 
-    ClinicalOrder save(ClinicalOrder order);
+    void save(ClinicalOrder order);
 
     ClinicalOrder findById(long id);
 

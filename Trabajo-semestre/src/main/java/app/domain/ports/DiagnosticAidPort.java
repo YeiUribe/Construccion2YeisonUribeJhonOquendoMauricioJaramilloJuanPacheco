@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface DiagnosticAidPort {
 
-    DiagnosticAid save(DiagnosticAid diagnosticAid);
+    void save(DiagnosticAid diagnosticAid);
 
     DiagnosticAid findById(long id);
 

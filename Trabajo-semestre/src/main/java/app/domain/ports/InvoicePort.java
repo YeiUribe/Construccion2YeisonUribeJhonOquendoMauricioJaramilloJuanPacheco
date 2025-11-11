@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface InvoicePort {
 
-    Invoice save(Invoice invoice);
+    void save(Invoice invoice);
 
     Invoice findById(long id);
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ProcedurePort {
 
-    Procedure save(Procedure procedure);
+    void save(Procedure procedure);
 
     Procedure findById(long id);
 

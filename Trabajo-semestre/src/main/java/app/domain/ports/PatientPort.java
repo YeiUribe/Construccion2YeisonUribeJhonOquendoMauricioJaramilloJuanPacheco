@@ -4,7 +4,7 @@ import app.domain.model.Patient;
 
 public interface PatientPort {
 
-    Patient save(Patient patient);
+    void save(Patient patient);
 
     Patient findByIdentificationNumber(String identificationNumber);
 }
