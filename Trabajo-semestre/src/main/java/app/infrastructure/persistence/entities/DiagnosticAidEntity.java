@@ -8,49 +8,47 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "diagnostic_aid")
+@Table(name = "Diagnostic_aid")
 public class DiagnosticAidEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "diagnostic_aid_id")
+    @Column(name = "Diagnostic_aid_id")
     private long diagnosticAidId;
 
-    @Column(name = "nombre", nullable = false, length = 100)
-    private String nombre;
+    @Column(name = "Nombre", nullable = false, length = 100)
+    private String name;
 
-    @Column(name = "descripcion", length = 255)
-    private String descripcion;
+    @Column(name = "Descripcion", length = 255)
+    private String description;
 
-    @Column(name = "costo", nullable = false)
-    private double costo;
+    @Column(name = "Costo", nullable = false)
+    private double cost;
 
-    @Column(name = "requiere_especialista", nullable = false)
-    private boolean requiereEspecialista;
+    @Column(name = "Requiere_especialista", nullable = false)
+    private boolean requiresSpecialist;
 
-    @Column(name = "tipo_especialidad", length = 100)
-    private String tipoEspecialidad;
+    @Column(name = "Tipo_especialidad", length = 100)
+    private String specialtyType;
 
-    @Column(name = "estado", nullable = false)
-    private boolean estado;
+    @Column(name = "Estado", nullable = false)
+    private boolean status;
 
-   
     public DiagnosticAidEntity() {
     }
 
-    public DiagnosticAidEntity(long diagnosticAidId, String nombre, String descripcion,
-                               double costo, boolean requiereEspecialista,
-                               String tipoEspecialidad, boolean estado) {
+    public DiagnosticAidEntity(long diagnosticAidId, String name, String description,
+            double cost, boolean requiresSpecialist,
+            String specialtyType, boolean status) {
         this.diagnosticAidId = diagnosticAidId;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.costo = costo;
-        this.requiereEspecialista = requiereEspecialista;
-        this.tipoEspecialidad = tipoEspecialidad;
-        this.estado = estado;
+        this.name = name;
+        this.description = description;
+        this.cost = cost;
+        this.requiresSpecialist = requiresSpecialist;
+        this.specialtyType = specialtyType;
+        this.status = status;
     }
 
-   
     public long getDiagnosticAidId() {
         return diagnosticAidId;
     }
@@ -59,51 +57,51 @@ public class DiagnosticAidEntity {
         this.diagnosticAidId = diagnosticAidId;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public double getCosto() {
-        return costo;
+    public double getCost() {
+        return cost;
     }
 
-    public void setCosto(double costo) {
-        this.costo = costo;
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
-    public boolean isRequiereEspecialista() {
-        return requiereEspecialista;
+    public boolean isRequiresSpecialist() {
+        return requiresSpecialist;
     }
 
-    public void setRequiereEspecialista(boolean requiereEspecialista) {
-        this.requiereEspecialista = requiereEspecialista;
+    public void setRequiresSpecialist(boolean requiresSpecialist) {
+        this.requiresSpecialist = requiresSpecialist;
     }
 
-    public String getTipoEspecialidad() {
-        return tipoEspecialidad;
+    public String getSpecialtyType() {
+        return specialtyType;
     }
 
-    public void setTipoEspecialidad(String tipoEspecialidad) {
-        this.tipoEspecialidad = tipoEspecialidad;
+    public void setSpecialtyType(String specialtyType) {
+        this.specialtyType = specialtyType;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public boolean isStatus() {
+        return status;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

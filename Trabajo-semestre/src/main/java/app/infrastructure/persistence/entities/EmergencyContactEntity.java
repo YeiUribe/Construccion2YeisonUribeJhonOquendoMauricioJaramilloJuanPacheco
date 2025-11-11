@@ -10,45 +10,43 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "emergency_contact")
+@Table(name = "Emergency_contact")
 public class EmergencyContactEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contact_id")
+    @Column(name = "Contact_id")
     private long contactId;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "Patient_id", nullable = false)
     private PatientEntity patient;
 
-    @Column(name = "nombres", nullable = false, length = 50)
-    private String nombres;
+    @Column(name = "Nombres", nullable = false, length = 50)
+    private String firstName;
 
-    @Column(name = "apellidos", nullable = false, length = 50)
-    private String apellidos;
+    @Column(name = "Apellidos", nullable = false, length = 50)
+    private String lastName;
 
-    @Column(name = "relacion", nullable = false, length = 50)
-    private String relacion;
+    @Column(name = "Relacion", nullable = false, length = 50)
+    private String relationship;
 
-    @Column(name = "telefono", nullable = false, length = 10)
-    private String telefono;
+    @Column(name = "Telefono", nullable = false, length = 10)
+    private String phone;
 
-   
     public EmergencyContactEntity() {
     }
 
-    public EmergencyContactEntity(long contactId, PatientEntity patient, String nombres,
-                                  String apellidos, String relacion, String telefono) {
+    public EmergencyContactEntity(long contactId, PatientEntity patient, String firstName,
+            String lastName, String relationship, String phone) {
         this.contactId = contactId;
         this.patient = patient;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.relacion = relacion;
-        this.telefono = telefono;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.relationship = relationship;
+        this.phone = phone;
     }
 
-    
     public long getContactId() {
         return contactId;
     }
@@ -65,36 +63,35 @@ public class EmergencyContactEntity {
         this.patient = patient;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getRelacion() {
-        return relacion;
+    public String getRelationship() {
+        return relationship;
     }
 
-    public void setRelacion(String relacion) {
-        this.relacion = relacion;
+    public void setRelationship(String relationship) {
+        this.relationship = relationship;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
-

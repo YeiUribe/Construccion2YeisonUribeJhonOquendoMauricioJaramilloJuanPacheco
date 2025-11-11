@@ -1,4 +1,3 @@
-
 package app.infrastructure.persistence.entities;
 
 import jakarta.persistence.Column;
@@ -9,57 +8,55 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "medication")
+@Table(name = "Medication")
 public class MedicationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "medication_id")
+    @Column(name = "Medication_id")
     private long medicationId;
 
-    @Column(name = "nombre", nullable = false, length = 100)
-    private String nombre;
+    @Column(name = "Nombre", nullable = false, length = 100)
+    private String name;
 
-    @Column(name = "descripcion", columnDefinition = "TEXT")
-    private String descripcion;
+    @Column(name = "Descripcion", columnDefinition = "TEXT")
+    private String description;
 
-    @Column(name = "forma_farmaceutica", length = 50)
-    private String formaFarmaceutica; 
+    @Column(name = "Forma_farmaceutica", length = 50)
+    private String pharmaceuticalForm;
 
-    @Column(name = "dosis", length = 50)
-    private String dosis; 
+    @Column(name = "Dosis", length = 50)
+    private String dosage;
 
-    @Column(name = "via_administracion", length = 50)
-    private String viaAdministracion; 
+    @Column(name = "Via_administracion", length = 50)
+    private String administrationRoute;
 
-    @Column(name = "fabricante", length = 100)
-    private String fabricante;
+    @Column(name = "Fabricante", length = 100)
+    private String manufacturer;
 
-    @Column(name = "stock_disponible", nullable = false)
-    private int stockDisponible;
+    @Column(name = "Stock_disponible", nullable = false)
+    private int availableStock;
 
-    @Column(name = "precio_unitario", nullable = false)
-    private double precioUnitario;
+    @Column(name = "Precio_unitario", nullable = false)
+    private double unitPrice;
 
-  
     public MedicationEntity() {
     }
 
-    public MedicationEntity(long medicationId, String nombre, String descripcion, String formaFarmaceutica,
-                            String dosis, String viaAdministracion, String fabricante,
-                            int stockDisponible, double precioUnitario) {
+    public MedicationEntity(long medicationId, String name, String description, String pharmaceuticalForm,
+            String dosage, String administrationRoute, String manufacturer,
+            int availableStock, double unitPrice) {
         this.medicationId = medicationId;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.formaFarmaceutica = formaFarmaceutica;
-        this.dosis = dosis;
-        this.viaAdministracion = viaAdministracion;
-        this.fabricante = fabricante;
-        this.stockDisponible = stockDisponible;
-        this.precioUnitario = precioUnitario;
+        this.name = name;
+        this.description = description;
+        this.pharmaceuticalForm = pharmaceuticalForm;
+        this.dosage = dosage;
+        this.administrationRoute = administrationRoute;
+        this.manufacturer = manufacturer;
+        this.availableStock = availableStock;
+        this.unitPrice = unitPrice;
     }
 
-    
     public long getMedicationId() {
         return medicationId;
     }
@@ -68,68 +65,67 @@ public class MedicationEntity {
         this.medicationId = medicationId;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getFormaFarmaceutica() {
-        return formaFarmaceutica;
+    public String getPharmaceuticalForm() {
+        return pharmaceuticalForm;
     }
 
-    public void setFormaFarmaceutica(String formaFarmaceutica) {
-        this.formaFarmaceutica = formaFarmaceutica;
+    public void setPharmaceuticalForm(String pharmaceuticalForm) {
+        this.pharmaceuticalForm = pharmaceuticalForm;
     }
 
-    public String getDosis() {
-        return dosis;
+    public String getDosage() {
+        return dosage;
     }
 
-    public void setDosis(String dosis) {
-        this.dosis = dosis;
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
     }
 
-    public String getViaAdministracion() {
-        return viaAdministracion;
+    public String getAdministrationRoute() {
+        return administrationRoute;
     }
 
-    public void setViaAdministracion(String viaAdministracion) {
-        this.viaAdministracion = viaAdministracion;
+    public void setAdministrationRoute(String administrationRoute) {
+        this.administrationRoute = administrationRoute;
     }
 
-    public String getFabricante() {
-        return fabricante;
+    public String getManufacturer() {
+        return manufacturer;
     }
 
-    public void setFabricante(String fabricante) {
-        this.fabricante = fabricante;
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
-    public int getStockDisponible() {
-        return stockDisponible;
+    public int getAvailableStock() {
+        return availableStock;
     }
 
-    public void setStockDisponible(int stockDisponible) {
-        this.stockDisponible = stockDisponible;
+    public void setAvailableStock(int availableStock) {
+        this.availableStock = availableStock;
     }
 
-    public double getPrecioUnitario() {
-        return precioUnitario;
+    public double getUnitPrice() {
+        return unitPrice;
     }
 
-    public void setPrecioUnitario(double precioUnitario) {
-        this.precioUnitario = precioUnitario;
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
     }
 }
-

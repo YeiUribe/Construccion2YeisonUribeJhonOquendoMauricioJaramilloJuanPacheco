@@ -30,45 +30,43 @@ public class InvoiceEntity {
     @JoinColumn(name = "insurance_id")
     private InsuranceEntity insurance;
 
-    @Column(name = "numero_poliza", length = 30)
-    private String numeroPoliza;
+    @Column(name = "Numero_poliza", length = 30)
+    private String policyNumber;
 
-    @Column(name = "dias_vigencia", nullable = false)
-    private int diasVigencia;
+    @Column(name = "Dias_vigencia", nullable = false)
+    private int daysOfValidity;
 
-    @Column(name = "fecha_finalizacion", nullable = false, length = 20)
-    private String fechaFinalizacion; 
+    @Column(name = "Fecha_finalizacion", nullable = false, length = 20)
+    private String endDate;
 
-    @Column(name = "costo_total", nullable = false)
-    private double costoTotal;
+    @Column(name = "Costo_total", nullable = false)
+    private double totalCost;
 
-    @Column(name = "copago", nullable = false)
-    private double copago;
+    @Column(name = "Copago", nullable = false)
+    private double copayment;
 
-    @Column(name = "detalle", columnDefinition = "TEXT")
-    private String detalle; 
+    @Column(name = "Detalle", columnDefinition = "TEXT")
+    private String details;
 
-  
     public InvoiceEntity() {
     }
 
     public InvoiceEntity(long invoiceId, PatientEntity patient, UserEntity doctor,
-                         InsuranceEntity insurance, String numeroPoliza,
-                         int diasVigencia, String fechaFinalizacion,
-                         double costoTotal, double copago, String detalle) {
+            InsuranceEntity insurance, String policyNumber,
+            int daysOfValidity, String endDate,
+            double totalCost, double copayment, String details) {
         this.invoiceId = invoiceId;
         this.patient = patient;
         this.doctor = doctor;
         this.insurance = insurance;
-        this.numeroPoliza = numeroPoliza;
-        this.diasVigencia = diasVigencia;
-        this.fechaFinalizacion = fechaFinalizacion;
-        this.costoTotal = costoTotal;
-        this.copago = copago;
-        this.detalle = detalle;
+        this.policyNumber = policyNumber;
+        this.daysOfValidity = daysOfValidity;
+        this.endDate = endDate;
+        this.totalCost = totalCost;
+        this.copayment = copayment;
+        this.details = details;
     }
 
-   
     public long getInvoiceId() {
         return invoiceId;
     }
@@ -101,51 +99,51 @@ public class InvoiceEntity {
         this.insurance = insurance;
     }
 
-    public String getNumeroPoliza() {
-        return numeroPoliza;
+    public String getPolicyNumber() {
+        return policyNumber;
     }
 
-    public void setNumeroPoliza(String numeroPoliza) {
-        this.numeroPoliza = numeroPoliza;
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
     }
 
-    public int getDiasVigencia() {
-        return diasVigencia;
+    public int getDaysOfValidity() {
+        return daysOfValidity;
     }
 
-    public void setDiasVigencia(int diasVigencia) {
-        this.diasVigencia = diasVigencia;
+    public void setDaysOfValidity(int daysOfValidity) {
+        this.daysOfValidity = daysOfValidity;
     }
 
-    public String getFechaFinalizacion() {
-        return fechaFinalizacion;
+    public String getEndDate() {
+        return endDate;
     }
 
-    public void setFechaFinalizacion(String fechaFinalizacion) {
-        this.fechaFinalizacion = fechaFinalizacion;
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
     }
 
-    public double getCostoTotal() {
-        return costoTotal;
+    public double getTotalCost() {
+        return totalCost;
     }
 
-    public void setCostoTotal(double costoTotal) {
-        this.costoTotal = costoTotal;
+    public void setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
     }
 
-    public double getCopago() {
-        return copago;
+    public double getCopayment() {
+        return copayment;
     }
 
-    public void setCopago(double copago) {
-        this.copago = copago;
+    public void setCopayment(double copayment) {
+        this.copayment = copayment;
     }
 
-    public String getDetalle() {
-        return detalle;
+    public String getDetails() {
+        return details;
     }
 
-    public void setDetalle(String detalle) {
-        this.detalle = detalle;
+    public void setDetails(String details) {
+        this.details = details;
     }
 }

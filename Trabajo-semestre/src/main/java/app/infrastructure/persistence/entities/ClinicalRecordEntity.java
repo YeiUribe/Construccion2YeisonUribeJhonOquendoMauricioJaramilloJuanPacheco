@@ -26,39 +26,37 @@ public class ClinicalRecordEntity {
     @JoinColumn(name = "doctor_id", nullable = false)
     private UserEntity doctor;
 
-    @Column(name = "fecha_creacion", nullable = false, length = 20)
-    private String fechaCreacion; // formato DD/MM/YYYY
+    @Column(name = "Fecha_creacion", nullable = false, length = 20)
+    private String creationDate;
 
-    @Column(name = "diagnostico", nullable = false, length = 500)
-    private String diagnostico;
+    @Column(name = "Diagnostico", nullable = false, length = 500)
+    private String diagnosis;
 
-    @Column(name = "tratamiento", nullable = false, length = 500)
-    private String tratamiento;
+    @Column(name = "Tratamiento", nullable = false, length = 500)
+    private String treatment;
 
-    @Column(name = "observaciones", length = 500)
-    private String observaciones;
+    @Column(name = "Observaciones", length = 500)
+    private String observations;
 
-    @Column(name = "activo", nullable = false)
-    private boolean activo;
+    @Column(name = "Activo", nullable = false)
+    private boolean isActive;
 
-    
     public ClinicalRecordEntity() {
     }
 
     public ClinicalRecordEntity(long clinicalRecordId, PatientEntity patient, UserEntity doctor,
-                                String fechaCreacion, String diagnostico, String tratamiento,
-                                String observaciones, boolean activo) {
+            String creationDate, String diagnosis, String treatment,
+            String observations, boolean isActive) {
         this.clinicalRecordId = clinicalRecordId;
         this.patient = patient;
         this.doctor = doctor;
-        this.fechaCreacion = fechaCreacion;
-        this.diagnostico = diagnostico;
-        this.tratamiento = tratamiento;
-        this.observaciones = observaciones;
-        this.activo = activo;
+        this.creationDate = creationDate;
+        this.diagnosis = diagnosis;
+        this.treatment = treatment;
+        this.observations = observations;
+        this.isActive = isActive;
     }
 
-    
     public long getClinicalRecordId() {
         return clinicalRecordId;
     }
@@ -83,44 +81,43 @@ public class ClinicalRecordEntity {
         this.doctor = doctor;
     }
 
-    public String getFechaCreacion() {
-        return fechaCreacion;
+    public String getCreationDate() {
+        return creationDate;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public String getDiagnostico() {
-        return diagnostico;
+    public String getDiagnosis() {
+        return diagnosis;
     }
 
-    public void setDiagnostico(String diagnostico) {
-        this.diagnostico = diagnostico;
+    public void setDiagnosis(String diagnosis) {
+        this.diagnosis = diagnosis;
     }
 
-    public String getTratamiento() {
-        return tratamiento;
+    public String getTreatment() {
+        return treatment;
     }
 
-    public void setTratamiento(String tratamiento) {
-        this.tratamiento = tratamiento;
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
     }
 
-    public String getObservaciones() {
-        return observaciones;
+    public String getObservations() {
+        return observations;
     }
 
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
+    public void setObservations(String observations) {
+        this.observations = observations;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public boolean isIsActive() {
+        return isActive;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }
-

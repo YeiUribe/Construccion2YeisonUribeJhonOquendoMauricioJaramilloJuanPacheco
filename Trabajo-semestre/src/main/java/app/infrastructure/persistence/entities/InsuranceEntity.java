@@ -10,45 +10,43 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "insurance")
+@Table(name = "Insurance")
 public class InsuranceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "insurance_id")
+    @Column(name = "Insurance_id")
     private long insuranceId;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "Patient_id", nullable = false)
     private PatientEntity patient;
 
-    @Column(name = "nombre_compania", nullable = false, length = 100)
-    private String nombreCompania;
+    @Column(name = "Nombre_compania", nullable = false, length = 100)
+    private String companyName;
 
-    @Column(name = "numero_poliza", nullable = false, unique = true, length = 30)
-    private String numeroPoliza;
+    @Column(name = "Numero_poliza", nullable = false, unique = true, length = 30)
+    private String policyNumber;
 
-    @Column(name = "estado_poliza", nullable = false)
-    private boolean estadoPoliza;
+    @Column(name = "Estado_poliza", nullable = false)
+    private boolean policyStatus;
 
-    @Column(name = "vigencia", nullable = false, length = 20)
-    private String vigencia; 
+    @Column(name = "Vigencia", nullable = false, length = 20)
+    private String validity;
 
-    
     public InsuranceEntity() {
     }
 
-    public InsuranceEntity(long insuranceId, PatientEntity patient, String nombreCompania,
-                           String numeroPoliza, boolean estadoPoliza, String vigencia) {
+    public InsuranceEntity(long insuranceId, PatientEntity patient, String companyName,
+            String policyNumber, boolean policyStatus, String validity) {
         this.insuranceId = insuranceId;
         this.patient = patient;
-        this.nombreCompania = nombreCompania;
-        this.numeroPoliza = numeroPoliza;
-        this.estadoPoliza = estadoPoliza;
-        this.vigencia = vigencia;
+        this.companyName = companyName;
+        this.policyNumber = policyNumber;
+        this.policyStatus = policyStatus;
+        this.validity = validity;
     }
 
-    // --- Getters y Setters ---
     public long getInsuranceId() {
         return insuranceId;
     }
@@ -65,36 +63,35 @@ public class InsuranceEntity {
         this.patient = patient;
     }
 
-    public String getNombreCompania() {
-        return nombreCompania;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setNombreCompania(String nombreCompania) {
-        this.nombreCompania = nombreCompania;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public String getNumeroPoliza() {
-        return numeroPoliza;
+    public String getPolicyNumber() {
+        return policyNumber;
     }
 
-    public void setNumeroPoliza(String numeroPoliza) {
-        this.numeroPoliza = numeroPoliza;
+    public void setPolicyNumber(String policyNumber) {
+        this.policyNumber = policyNumber;
     }
 
-    public boolean isEstadoPoliza() {
-        return estadoPoliza;
+    public boolean isPolicyStatus() {
+        return policyStatus;
     }
 
-    public void setEstadoPoliza(boolean estadoPoliza) {
-        this.estadoPoliza = estadoPoliza;
+    public void setPolicyStatus(boolean policyStatus) {
+        this.policyStatus = policyStatus;
     }
 
-    public String getVigencia() {
-        return vigencia;
+    public String getValidity() {
+        return validity;
     }
 
-    public void setVigencia(String vigencia) {
-        this.vigencia = vigencia;
+    public void setValidity(String validity) {
+        this.validity = validity;
     }
 }
-

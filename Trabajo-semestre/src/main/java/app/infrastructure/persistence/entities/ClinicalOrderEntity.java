@@ -10,46 +10,44 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "clinical_order")
+@Table(name = "Clinical_order")
 public class ClinicalOrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
+    @Column(name = "Order_id")
     private long orderId;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
+    @JoinColumn(name = "Patient_id", nullable = false)
     private PatientEntity patient;
 
     @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
+    @JoinColumn(name = "Doctor_id", nullable = false)
     private UserEntity doctor;
 
-    @Column(name = "fecha_creacion", nullable = false, length = 20)
-    private String fechaCreacion; 
+    @Column(name = "Fecha_creacion", nullable = false, length = 20)
+    private String creationDate;
 
-    @Column(name = "tipo_orden", nullable = false, length = 50)
-    private String tipoOrden; 
+    @Column(name = "Tipo_orden", nullable = false, length = 50)
+    private String orderType;
 
-    @Column(name = "activo", nullable = false)
-    private boolean activo;
+    @Column(name = "Activo", nullable = false)
+    private boolean isActive;
 
-  
     public ClinicalOrderEntity() {
     }
 
     public ClinicalOrderEntity(long orderId, PatientEntity patient, UserEntity doctor,
-                               String fechaCreacion, String tipoOrden, boolean activo) {
+            String creationDate, String orderType, boolean isActive) {
         this.orderId = orderId;
         this.patient = patient;
         this.doctor = doctor;
-        this.fechaCreacion = fechaCreacion;
-        this.tipoOrden = tipoOrden;
-        this.activo = activo;
+        this.creationDate = creationDate;
+        this.orderType = orderType;
+        this.isActive = isActive;
     }
 
-    
     public long getOrderId() {
         return orderId;
     }
@@ -74,27 +72,27 @@ public class ClinicalOrderEntity {
         this.doctor = doctor;
     }
 
-    public String getFechaCreacion() {
-        return fechaCreacion;
+    public String getCreationDate() {
+        return creationDate;
     }
 
-    public void setFechaCreacion(String fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public String getTipoOrden() {
-        return tipoOrden;
+    public String getOrderType() {
+        return orderType;
     }
 
-    public void setTipoOrden(String tipoOrden) {
-        this.tipoOrden = tipoOrden;
+    public void setOrderType(String orderType) {
+        this.orderType = orderType;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public boolean isIsActive() {
+        return isActive;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 }
