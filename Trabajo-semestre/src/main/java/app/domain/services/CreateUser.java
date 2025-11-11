@@ -11,7 +11,7 @@ public class CreateUser {
     @Autowired
     private UserPort userPort;
 
-    public User execute(User user) {
+    public User execute(User user) throws Exception {
         if (userPort.findByDocumentNumber(user.getDocumentNumber()) != null) {
             throw new IllegalStateException("El usuario con este número de documento ya existe.");
         }

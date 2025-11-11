@@ -11,7 +11,7 @@ public class UpdateStaffInfo {
     @Autowired
     private UserPort userPort;
 
-    public User execute(User updatedUserData) {
+    public User execute(User updatedUserData) throws Exception {
         User existingUser = userPort.findByDocumentNumber(updatedUserData.getDocumentNumber());
         if (existingUser == null) {
             throw new IllegalStateException("Usuario a actualizar no encontrado.");
