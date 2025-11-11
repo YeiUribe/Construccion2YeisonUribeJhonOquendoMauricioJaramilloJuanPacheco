@@ -1,131 +1,39 @@
 package app.infrastructure.persistence.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import app.domain.model.enums.Specialty;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Medication")
+@Table(name = "medications")
 public class MedicationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Medication_id")
-    private long medicationId;
-
-    @Column(name = "Nombre", nullable = false, length = 100)
+    private Long id;
+    
+    private int itemNumber;
     private String name;
-
-    @Column(name = "Descripcion", columnDefinition = "TEXT")
-    private String description;
-
-    @Column(name = "Forma_farmaceutica", length = 50)
-    private String pharmaceuticalForm;
-
-    @Column(name = "Dosis", length = 50)
     private String dosage;
+    private String duration;
+    private double cost;
 
-    @Column(name = "Via_administracion", length = 50)
-    private String administrationRoute;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_id")
+    private ClinicalOrderEntity clinicalOrder;
 
-    @Column(name = "Fabricante", length = 100)
-    private String manufacturer;
-
-    @Column(name = "Stock_disponible", nullable = false)
-    private int availableStock;
-
-    @Column(name = "Precio_unitario", nullable = false)
-    private double unitPrice;
-
-    public MedicationEntity() {
-    }
-
-    public MedicationEntity(long medicationId, String name, String description, String pharmaceuticalForm,
-            String dosage, String administrationRoute, String manufacturer,
-            int availableStock, double unitPrice) {
-        this.medicationId = medicationId;
-        this.name = name;
-        this.description = description;
-        this.pharmaceuticalForm = pharmaceuticalForm;
-        this.dosage = dosage;
-        this.administrationRoute = administrationRoute;
-        this.manufacturer = manufacturer;
-        this.availableStock = availableStock;
-        this.unitPrice = unitPrice;
-    }
-
-    public long getMedicationId() {
-        return medicationId;
-    }
-
-    public void setMedicationId(long medicationId) {
-        this.medicationId = medicationId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPharmaceuticalForm() {
-        return pharmaceuticalForm;
-    }
-
-    public void setPharmaceuticalForm(String pharmaceuticalForm) {
-        this.pharmaceuticalForm = pharmaceuticalForm;
-    }
-
-    public String getDosage() {
-        return dosage;
-    }
-
-    public void setDosage(String dosage) {
-        this.dosage = dosage;
-    }
-
-    public String getAdministrationRoute() {
-        return administrationRoute;
-    }
-
-    public void setAdministrationRoute(String administrationRoute) {
-        this.administrationRoute = administrationRoute;
-    }
-
-    public String getManufacturer() {
-        return manufacturer;
-    }
-
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public int getAvailableStock() {
-        return availableStock;
-    }
-
-    public void setAvailableStock(int availableStock) {
-        this.availableStock = availableStock;
-    }
-
-    public double getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(double unitPrice) {
-        this.unitPrice = unitPrice;
-    }
+    // Getters y Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public int getItemNumber() { return itemNumber; }
+    public void setItemNumber(int itemNumber) { this.itemNumber = itemNumber; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getDosage() { return dosage; }
+    public void setDosage(String dosage) { this.dosage = dosage; }
+    public String getDuration() { return duration; }
+    public void setDuration(String duration) { this.duration = duration; }
+    public double getCost() { return cost; }
+    public void setCost(double cost) { this.cost = cost; }
+    public ClinicalOrderEntity getClinicalOrder() { return clinicalOrder; }
+    public void setClinicalOrder(ClinicalOrderEntity clinicalOrder) { this.clinicalOrder = clinicalOrder; }
 }

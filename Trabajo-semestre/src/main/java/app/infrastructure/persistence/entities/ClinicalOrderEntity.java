@@ -1,98 +1,48 @@
 package app.infrastructure.persistence.entities;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "Clinical_order")
+@Table(name = "clinical_orders")
 public class ClinicalOrderEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Order_id")
-    private long orderId;
-
-    @ManyToOne
-    @JoinColumn(name = "Patient_id", nullable = false)
+    private Long id;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id")
     private PatientEntity patient;
-
-    @ManyToOne
-    @JoinColumn(name = "Doctor_id", nullable = false)
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "doctor_id")
     private UserEntity doctor;
+    
+    private LocalDate creationDate;
+    
+    @OneToMany(mappedBy = "clinicalOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedicationEntity> medications;
+    
+    @OneToMany(mappedBy = "clinicalOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProcedureEntity> procedures;
+    
+    @OneToMany(mappedBy = "clinicalOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DiagnosticAidEntity> diagnosticAids;
 
-    @Column(name = "Fecha_creacion", nullable = false, length = 20)
-    private String creationDate;
-
-    @Column(name = "Tipo_orden", nullable = false, length = 50)
-    private String orderType;
-
-    @Column(name = "Activo", nullable = false)
-    private boolean isActive;
-
-    public ClinicalOrderEntity() {
-    }
-
-    public ClinicalOrderEntity(long orderId, PatientEntity patient, UserEntity doctor,
-            String creationDate, String orderType, boolean isActive) {
-        this.orderId = orderId;
-        this.patient = patient;
-        this.doctor = doctor;
-        this.creationDate = creationDate;
-        this.orderType = orderType;
-        this.isActive = isActive;
-    }
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
-
-    public PatientEntity getPatient() {
-        return patient;
-    }
-
-    public void setPatient(PatientEntity patient) {
-        this.patient = patient;
-    }
-
-    public UserEntity getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(UserEntity doctor) {
-        this.doctor = doctor;
-    }
-
-    public String getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public String getOrderType() {
-        return orderType;
-    }
-
-    public void setOrderType(String orderType) {
-        this.orderType = orderType;
-    }
-
-    public boolean isIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
-    }
+    // Getters y Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public PatientEntity getPatient() { return patient; }
+    public void setPatient(PatientEntity patient) { this.patient = patient; }
+    public UserEntity getDoctor() { return doctor; }
+    public void setDoctor(UserEntity doctor) { this.doctor = doctor; }
+    public LocalDate getCreationDate() { return creationDate; }
+    public void setCreationDate(LocalDate creationDate) { this.creationDate = creationDate; }
+    public List<MedicationEntity> getMedications() { return medications; }
+    public void setMedications(List<MedicationEntity> medications) { this.medications = medications; }
+    public List<ProcedureEntity> getProcedures() { return procedures; }
+    public void setProcedures(List<ProcedureEntity> procedures) { this.procedures = procedures; }
+    public List<DiagnosticAidEntity> getDiagnosticAids() { return diagnosticAids; }
+    public void setDiagnosticAids(List<DiagnosticAidEntity> diagnosticAids) { this.diagnosticAids = diagnosticAids; }
 }

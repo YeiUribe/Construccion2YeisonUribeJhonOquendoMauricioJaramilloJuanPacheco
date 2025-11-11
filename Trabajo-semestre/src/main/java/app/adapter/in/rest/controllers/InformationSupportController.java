@@ -81,7 +81,7 @@ public class InformationSupportController {
                      insuranceBuilder.build(
                          request.getCompanyName(), 
                          request.getContactNumber(), 
-                         String.valueOf(request.isActive()) // Convierte boolean a String para el builder
+                         String.valueOf(request.isActive()) 
                      )
                  )
              );

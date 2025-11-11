@@ -1,123 +1,54 @@
 package app.infrastructure.persistence.entities;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "clinical_record")
+@Table(name = "clinical_records")
 public class ClinicalRecordEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "clinical_record_id")
-    private long clinicalRecordId;
-
-    @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
+    private Long id;
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "patient_id")
     private PatientEntity patient;
-
-    @ManyToOne
-    @JoinColumn(name = "doctor_id", nullable = false)
+    
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "doctor_id")
     private UserEntity doctor;
-
-    @Column(name = "Fecha_creacion", nullable = false, length = 20)
-    private String creationDate;
-
-    @Column(name = "Diagnostico", nullable = false, length = 500)
+    
+    private LocalDate recordDate;
+    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "vitals_id")
+    private PatientVitalsEntity vitals; 
+    
+    private String reasonForVisit;
+    private String symptoms;
     private String diagnosis;
+    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id")
+    private ClinicalOrderEntity clinicalOrder;
 
-    @Column(name = "Tratamiento", nullable = false, length = 500)
-    private String treatment;
-
-    @Column(name = "Observaciones", length = 500)
-    private String observations;
-
-    @Column(name = "Activo", nullable = false)
-    private boolean isActive;
-
-    public ClinicalRecordEntity() {
-    }
-
-    public ClinicalRecordEntity(long clinicalRecordId, PatientEntity patient, UserEntity doctor,
-            String creationDate, String diagnosis, String treatment,
-            String observations, boolean isActive) {
-        this.clinicalRecordId = clinicalRecordId;
-        this.patient = patient;
-        this.doctor = doctor;
-        this.creationDate = creationDate;
-        this.diagnosis = diagnosis;
-        this.treatment = treatment;
-        this.observations = observations;
-        this.isActive = isActive;
-    }
-
-    public long getClinicalRecordId() {
-        return clinicalRecordId;
-    }
-
-    public void setClinicalRecordId(long clinicalRecordId) {
-        this.clinicalRecordId = clinicalRecordId;
-    }
-
-    public PatientEntity getPatient() {
-        return patient;
-    }
-
-    public void setPatient(PatientEntity patient) {
-        this.patient = patient;
-    }
-
-    public UserEntity getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(UserEntity doctor) {
-        this.doctor = doctor;
-    }
-
-    public String getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public String getDiagnosis() {
-        return diagnosis;
-    }
-
-    public void setDiagnosis(String diagnosis) {
-        this.diagnosis = diagnosis;
-    }
-
-    public String getTreatment() {
-        return treatment;
-    }
-
-    public void setTreatment(String treatment) {
-        this.treatment = treatment;
-    }
-
-    public String getObservations() {
-        return observations;
-    }
-
-    public void setObservations(String observations) {
-        this.observations = observations;
-    }
-
-    public boolean isIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
-    }
+    // Getters y Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public PatientEntity getPatient() { return patient; }
+    public void setPatient(PatientEntity patient) { this.patient = patient; }
+    public UserEntity getDoctor() { return doctor; }
+    public void setDoctor(UserEntity doctor) { this.doctor = doctor; }
+    public LocalDate getRecordDate() { return recordDate; }
+    public void setRecordDate(LocalDate recordDate) { this.recordDate = recordDate; }
+    public PatientVitalsEntity getVitals() { return vitals; }
+    public void setVitals(PatientVitalsEntity vitals) { this.vitals = vitals; }
+    public String getReasonForVisit() { return reasonForVisit; }
+    public void setReasonForVisit(String reasonForVisit) { this.reasonForVisit = reasonForVisit; }
+    public String getSymptoms() { return symptoms; }
+    public void setSymptoms(String symptoms) { this.symptoms = symptoms; }
+    public String getDiagnosis() { return diagnosis; }
+    public void setDiagnosis(String diagnosis) { this.diagnosis = diagnosis; }
+    public ClinicalOrderEntity getClinicalOrder() { return clinicalOrder; }
+    public void setClinicalOrder(ClinicalOrderEntity clinicalOrder) { this.clinicalOrder = clinicalOrder; }
 }
