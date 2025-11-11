@@ -19,7 +19,8 @@ public class UpdateStaffInfo {
         existingUser.setFullName(updatedUserData.getFullName());
         existingUser.setPhoneNumber(updatedUserData.getPhoneNumber());
         existingUser.setAddress(updatedUserData.getAddress());
-
-        return userPort.save(existingUser);
+        
+        userPort.save(existingUser);
+        return existingUser;
     }
 }
