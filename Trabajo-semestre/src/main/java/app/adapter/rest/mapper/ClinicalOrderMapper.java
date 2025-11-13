@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ClinicalOrderMapper {
 
-    public static ClinicalOrder toDomain(ClinicalOrderRequest req) {
+    public static ClinicalOrder fromRequest(ClinicalOrderRequest req) {
         if (req == null) return null;
         ClinicalOrder o = new ClinicalOrder();
         // patient/doctor resolution by id should be done in service layer
@@ -25,6 +25,10 @@ public class ClinicalOrderMapper {
             o.setDiagnosticAids(req.getDiagnosticAids().stream().map(DiagnosticAidMapper::toDomain).collect(Collectors.toList()));
         }
         return o;
+    }
+
+    public static ClinicalOrder toDomain(ClinicalOrderRequest req) {
+        return fromRequest(req);
     }
 
     public static ClinicalOrderResponse toResponse(ClinicalOrder o) {

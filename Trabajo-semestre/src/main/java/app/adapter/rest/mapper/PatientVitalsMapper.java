@@ -1,6 +1,7 @@
 package app.adapter.rest.mapper;
 
 import app.adapter.rest.request.PatientVitalsRequest;
+import app.adapter.rest.request.VitalsRequest;
 import app.adapter.rest.response.PatientVitalsResponse;
 import app.domain.model.PatientVitals;
 import app.domain.model.Patient;
@@ -8,6 +9,17 @@ import app.domain.model.Patient;
 public class PatientVitalsMapper {
 
     public static PatientVitals toDomain(PatientVitalsRequest req) {
+        if (req == null) return null;
+        PatientVitals v = new PatientVitals();
+        v.setRecordTimestamp(req.getRecordTimestamp());
+        v.setBloodPressure(req.getBloodPressure());
+        v.setTemperature(req.getTemperature());
+        v.setPulse(req.getPulse());
+        v.setOxygenLevel(req.getOxygenLevel());
+        return v;
+    }
+
+    public static PatientVitals fromRequest(VitalsRequest req) {
         if (req == null) return null;
         PatientVitals v = new PatientVitals();
         v.setRecordTimestamp(req.getRecordTimestamp());

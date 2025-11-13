@@ -1,5 +1,6 @@
 package app.adapter.rest.mapper;
 
+import app.adapter.rest.request.InventoryItemRequest;
 import app.adapter.rest.request.MedicationRequest;
 import app.adapter.rest.response.MedicationResponse;
 import app.domain.model.Medication;
@@ -13,6 +14,14 @@ public class MedicationMapper {
         m.setName(req.getName());
         m.setDosage(req.getDosage());
         m.setDuration(req.getDuration());
+        m.setCost(req.getCost());
+        return m;
+    }
+
+    public static Medication toDomain(InventoryItemRequest req) {
+        if (req == null) return null;
+        Medication m = new Medication();
+        m.setName(req.getName());
         m.setCost(req.getCost());
         return m;
     }

@@ -6,13 +6,17 @@ import app.domain.model.Insurance;
 
 public class InsuranceMapper {
 
-    public static Insurance toDomain(InsuranceRequest req) {
+    public static Insurance fromRequest(InsuranceRequest req) {
         if (req == null) return null;
         Insurance ins = new Insurance();
         ins.setCompanyName(req.getCompanyName());
         ins.setContactNumber(req.getContactNumber());
         ins.setActive(req.isActive());
         return ins;
+    }
+
+    public static Insurance toDomain(InsuranceRequest req) {
+        return fromRequest(req);
     }
 
     public static InsuranceResponse toResponse(Insurance ins) {

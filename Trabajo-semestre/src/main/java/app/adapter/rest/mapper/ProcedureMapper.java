@@ -1,5 +1,6 @@
 package app.adapter.rest.mapper;
 
+import app.adapter.rest.request.InventoryItemRequest;
 import app.adapter.rest.request.ProcedureRequest;
 import app.adapter.rest.response.ProcedureResponse;
 import app.domain.model.Procedure;
@@ -15,6 +16,14 @@ public class ProcedureMapper {
         p.setFrequency(req.getFrequency());
         p.setRequiresSpecialist(req.isRequiresSpecialist());
         // specialty mapping left as string -> enum resolution in service
+        p.setCost(req.getCost());
+        return p;
+    }
+
+    public static Procedure toDomain(InventoryItemRequest req) {
+        if (req == null) return null;
+        Procedure p = new Procedure();
+        p.setName(req.getName());
         p.setCost(req.getCost());
         return p;
     }

@@ -1,6 +1,7 @@
 package app.adapter.rest.mapper;
 
 import app.adapter.rest.request.DiagnosticAidRequest;
+import app.adapter.rest.request.InventoryItemRequest;
 import app.adapter.rest.response.DiagnosticAidResponse;
 import app.domain.model.DiagnosticAid;
 
@@ -13,6 +14,14 @@ public class DiagnosticAidMapper {
         d.setName(req.getName());
         d.setQuantity(req.getQuantity());
         d.setRequiresSpecialist(req.isRequiresSpecialist());
+        d.setCost(req.getCost());
+        return d;
+    }
+
+    public static DiagnosticAid toDomain(InventoryItemRequest req) {
+        if (req == null) return null;
+        DiagnosticAid d = new DiagnosticAid();
+        d.setName(req.getName());
         d.setCost(req.getCost());
         return d;
     }

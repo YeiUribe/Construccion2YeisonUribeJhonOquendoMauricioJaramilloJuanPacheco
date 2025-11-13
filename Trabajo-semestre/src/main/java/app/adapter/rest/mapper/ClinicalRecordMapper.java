@@ -1,5 +1,6 @@
 package app.adapter.rest.mapper;
 
+import app.adapter.rest.request.ClinicalRecordRequest;
 import app.adapter.rest.response.ClinicalRecordResponse;
 import app.domain.model.ClinicalRecord;
 import app.domain.model.Patient;
@@ -26,5 +27,15 @@ public class ClinicalRecordMapper {
         r.setSymptoms(c.getSymptoms());
         r.setDiagnosis(c.getDiagnosis());
         return r;
+    }
+
+    public static ClinicalRecord fromRequest(ClinicalRecordRequest req) {
+        if (req == null) return null;
+        ClinicalRecord c = new ClinicalRecord();
+        c.setRecordDate(req.getRecordDate());
+        c.setReasonForVisit(req.getReasonForVisit());
+        c.setSymptoms(req.getSymptoms());
+        c.setDiagnosis(req.getDiagnosis());
+        return c;
     }
 }
