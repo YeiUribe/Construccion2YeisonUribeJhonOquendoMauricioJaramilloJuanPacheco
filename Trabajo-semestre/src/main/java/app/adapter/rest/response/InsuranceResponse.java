@@ -1,15 +1,22 @@
-package app.adapter.in.rest.request;
+package app.adapter.rest.response;
 
-public class InsuranceRequest {
+public class InsuranceResponse {
+    private long id;
     private String companyName;
     private String contactNumber;
-    private boolean isActive; // Usamos boolean directamente
+    private boolean active;
 
-    // Getters y Setters
+    public InsuranceResponse() {}
+
+    public long getId() { return id; }
+    public void setId(long id) { this.id = id; }
+
     public String getCompanyName() { return companyName; }
     public void setCompanyName(String companyName) { this.companyName = companyName; }
+
     public String getContactNumber() { return contactNumber; }
     public void setContactNumber(String contactNumber) { this.contactNumber = contactNumber; }
-    public boolean isActive() { return isActive; }
-    public void setActive(boolean isActive) { this.isActive = isActive; }
+
+    public boolean isActive() { return active; }
+    public void setActive(boolean active) { this.active = active; }
 }
