@@ -11,7 +11,10 @@ public final class ClinicalOrderMapper {
     public static ClinicalOrderEntity toEntity(ClinicalOrder domain) {
         if (domain == null) return null;
         ClinicalOrderEntity entity = new ClinicalOrderEntity();
-        entity.setId(domain.getId());
+        // evitar asignar id por defecto (0) para que JPA realice INSERT
+        if (domain.getId() > 0) {
+            entity.setId(domain.getId());
+        }
         entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
         entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
         entity.setCreationDate(domain.getCreationDate());

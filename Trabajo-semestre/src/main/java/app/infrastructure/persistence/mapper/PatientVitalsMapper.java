@@ -10,7 +10,10 @@ public final class PatientVitalsMapper {
     public static PatientVitalsEntity toEntity(PatientVitals domain) {
         if (domain == null) return null;
         PatientVitalsEntity entity = new PatientVitalsEntity();
-        entity.setId(domain.getId()); // Asumiendo que el dominio tiene ID
+        // evitar asignar id cuando domain.id == 0 (valor por defecto de `long`)
+        if (domain.getId() > 0) {
+            entity.setId(domain.getId());
+        }
         entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
         entity.setRecordTimestamp(domain.getRecordTimestamp());
         entity.setBloodPressure(domain.getBloodPressure());

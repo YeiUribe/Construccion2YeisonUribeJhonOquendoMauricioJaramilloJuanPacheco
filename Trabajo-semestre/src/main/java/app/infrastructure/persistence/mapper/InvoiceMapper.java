@@ -10,7 +10,10 @@ public final class InvoiceMapper {
     public static InvoiceEntity toEntity(Invoice domain) {
         if (domain == null) return null;
         InvoiceEntity entity = new InvoiceEntity();
-        entity.setId(domain.getId());
+        // no setear id si es el valor por defecto 0
+        if (domain.getId() > 0) {
+            entity.setId(domain.getId());
+        }
         entity.setIssueDate(domain.getIssueDate());
         entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
         entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));

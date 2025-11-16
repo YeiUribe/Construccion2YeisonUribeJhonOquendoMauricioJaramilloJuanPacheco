@@ -10,7 +10,10 @@ public final class DiagnosticAidMapper {
     public static DiagnosticAidEntity toEntity(DiagnosticAid domain) {
         if (domain == null) return null;
         DiagnosticAidEntity entity = new DiagnosticAidEntity();
-        entity.setId(domain.getId()); 
+        // evitar asignar id cuando domain.id es 0 (valor por defecto)
+        if (domain.getId() > 0) {
+            entity.setId(domain.getId());
+        }
         entity.setItemNumber(domain.getItemNumber());
         entity.setName(domain.getName());
         entity.setQuantity(domain.getQuantity());

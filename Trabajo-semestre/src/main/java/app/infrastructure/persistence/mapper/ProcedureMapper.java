@@ -10,7 +10,11 @@ public final class ProcedureMapper {
     public static ProcedureEntity toEntity(Procedure domain) {
         if (domain == null) return null;
         ProcedureEntity entity = new ProcedureEntity();
-        entity.setId(domain.getId()); 
+        // no asignar id cuando el domain.id es 0 (valor por defecto de long),
+        // así JPA generará INSERT en lugar de intentar resolver por id
+        if (domain.getId() > 0) {
+            entity.setId(domain.getId());
+        }
         entity.setItemNumber(domain.getItemNumber());
         entity.setName(domain.getName());
         entity.setRepetitionCount(domain.getRepetitionCount());

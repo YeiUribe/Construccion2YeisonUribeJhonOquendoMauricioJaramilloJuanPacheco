@@ -10,7 +10,10 @@ public final class ClinicalRecordMapper {
     public static ClinicalRecordEntity toEntity(ClinicalRecord domain) {
         if (domain == null) return null;
         ClinicalRecordEntity entity = new ClinicalRecordEntity();
-        entity.setId(domain.getId()); // Asumiendo que el dominio tiene ID
+        // no asignar id si es el valor por defecto 0, para permitir INSERT
+        if (domain.getId() > 0) {
+            entity.setId(domain.getId());
+        }
         entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
         entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
         entity.setRecordDate(domain.getRecordDate());
