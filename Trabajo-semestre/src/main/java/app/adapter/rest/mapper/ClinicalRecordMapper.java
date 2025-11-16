@@ -32,6 +32,21 @@ public class ClinicalRecordMapper {
     public static ClinicalRecord fromRequest(ClinicalRecordRequest req) {
         if (req == null) return null;
         ClinicalRecord c = new ClinicalRecord();
+        
+        // Crear Patient con identificationNumber
+        if (req.getPatientId() != null) {
+            Patient p = new Patient();
+            p.setIdentificationNumber(req.getPatientId());
+            c.setPatient(p);
+        }
+        
+        // Crear User (doctor) con documentNumber
+        if (req.getDoctorId() != null) {
+            User d = new User();
+            d.setDocumentNumber(req.getDoctorId());
+            c.setDoctor(d);
+        }
+        
         c.setRecordDate(req.getRecordDate());
         c.setReasonForVisit(req.getReasonForVisit());
         c.setSymptoms(req.getSymptoms());

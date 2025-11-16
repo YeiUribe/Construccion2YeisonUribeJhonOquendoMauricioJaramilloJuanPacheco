@@ -12,6 +12,7 @@ import app.domain.services.CalculateActivePolicyCopay;
 import app.domain.services.CalculateInactivePolicyPayment;
 import app.domain.services.CheckCopayExemption;
 import app.domain.services.RegisterPatient;
+import app.domain.ports.InvoicePort;
 
 @Component
 public class AdministrativeUseCase {
@@ -21,6 +22,9 @@ public class AdministrativeUseCase {
 
     @Autowired
     private CheckCopayExemption checkCopayExemption;
+
+    @Autowired
+    private InvoicePort invoicePort;
 
     @Autowired
     private CalculateActivePolicyCopay calculateActivePolicyCopay;
@@ -52,6 +56,8 @@ public class AdministrativeUseCase {
             invoice.setCopayAmount(copay);
         }
 
+        // persistir la factura antes de devolverla
+        invoicePort.save(invoice);
         return invoice;
     }
 }

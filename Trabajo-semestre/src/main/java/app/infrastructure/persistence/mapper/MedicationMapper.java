@@ -10,7 +10,10 @@ public final class MedicationMapper {
     public static MedicationEntity toEntity(Medication domain) {
         if (domain == null) return null;
         MedicationEntity entity = new MedicationEntity();
-        entity.setId(domain.getOrderId()); 
+        // evitar asignar id cuando domain.getOrderId() == 0 (valor por defecto de `long`)
+        if (domain.getOrderId() > 0) {
+            entity.setId(domain.getOrderId());
+        }
         entity.setItemNumber(domain.getItemNumber());
         entity.setName(domain.getName());
         entity.setDosage(domain.getDosage());

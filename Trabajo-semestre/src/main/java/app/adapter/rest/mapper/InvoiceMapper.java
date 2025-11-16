@@ -13,6 +13,18 @@ public class InvoiceMapper {
         Invoice i = new Invoice();
         i.setIssueDate(req.getIssueDate());
         i.setTotalAmount(req.getTotalAmount());
+        // map patient and doctor IDs from request to lightweight domain objects
+        if (req.getPatientId() != null) {
+            app.domain.model.Patient p = new app.domain.model.Patient();
+            // Patient.identificationNumber is a String PK; convert numeric id to String
+            p.setIdentificationNumber(String.valueOf(req.getPatientId()));
+            i.setPatient(p);
+        }
+        if (req.getDoctorId() != null) {
+            app.domain.model.User d = new app.domain.model.User();
+            d.setDocumentNumber(String.valueOf(req.getDoctorId()));
+            i.setDoctor(d);
+        }
         return i;
     }
 

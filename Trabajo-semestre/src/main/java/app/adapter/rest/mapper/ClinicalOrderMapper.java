@@ -13,7 +13,21 @@ public class ClinicalOrderMapper {
     public static ClinicalOrder fromRequest(ClinicalOrderRequest req) {
         if (req == null) return null;
         ClinicalOrder o = new ClinicalOrder();
-        // patient/doctor resolution by id should be done in service layer
+        
+        // Crear Patient con identificationNumber
+        if (req.getPatientId() != null) {
+            Patient p = new Patient();
+            p.setIdentificationNumber(req.getPatientId());
+            o.setPatient(p);
+        }
+        
+        // Crear User (doctor) con documentNumber
+        if (req.getDoctorId() != null) {
+            User d = new User();
+            d.setDocumentNumber(req.getDoctorId());
+            o.setDoctor(d);
+        }
+        
         o.setCreationDate(req.getCreationDate());
         if (req.getMedications() != null) {
             o.setMedications(req.getMedications().stream().map(MedicationMapper::toDomain).collect(Collectors.toList()));

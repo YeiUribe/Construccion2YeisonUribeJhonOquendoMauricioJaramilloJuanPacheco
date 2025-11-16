@@ -15,15 +15,15 @@ public class UserEntity {
     @Column(nullable = false)
     private String fullName;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, length = 100)
     private String email;
 
-    @Column(length = 10)
+    @Column(length = 20)
     private String phoneNumber;
 
     private LocalDate birthDate;
 
-    @Column(length = 30)
+    @Column(length = 100)
     private String address;
 
     @Enumerated(EnumType.STRING)

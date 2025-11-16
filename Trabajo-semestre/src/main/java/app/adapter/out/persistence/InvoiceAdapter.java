@@ -2,6 +2,10 @@ package app.adapter.out.persistence;
 
 import app.domain.model.Invoice;
 import app.domain.model.Patient;
+import app.infrastructure.persistence.entities.PatientEntity;
+import app.infrastructure.persistence.entities.UserEntity;
+import app.infrastructure.persistence.repository.PatientRepository;
+import app.infrastructure.persistence.repository.UserRepository;
 import app.domain.ports.InvoicePort;
 import app.infrastructure.persistence.entities.InvoiceEntity;
 import app.infrastructure.persistence.mapper.InvoiceMapper;
@@ -18,10 +22,40 @@ public class InvoiceAdapter implements InvoicePort {
     @Autowired
     private InvoiceRepository invoiceRepository;
 
+    @Autowired
+    private PatientRepository patientRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public void save(Invoice invoice) throws Exception {
         InvoiceEntity entity = InvoiceMapper.toEntity(invoice);
-        invoiceRepository.save(entity);
+        // ensure patient and doctor are managed entities (not transient)
+        if (invoice.getPatient() != null && invoice.getPatient().getIdentificationNumber() != null) {
+            PatientEntity pe = patientRepository.findByIdentificationNumber(invoice.getPatient().getIdentificationNumber());
+            if (pe == null) {
+                throw new IllegalStateException("Paciente no encontrado: " + invoice.getPatient().getIdentificationNumber());
+            }
+            entity.setPatient(pe);
+        } else {
+            throw new IllegalStateException("Factura debe incluir un paciente válido");
+        }
+        if (invoice.getDoctor() != null && invoice.getDoctor().getDocumentNumber() != null) {
+            UserEntity ue = userRepository.findByDocumentNumber(invoice.getDoctor().getDocumentNumber());
+            if (ue == null) {
+                throw new IllegalStateException("Doctor no encontrado: " + invoice.getDoctor().getDocumentNumber());
+            }
+            entity.setDoctor(ue);
+        } else {
+            throw new IllegalStateException("Factura debe incluir un doctor válido");
+        }
+
+        InvoiceEntity saved = invoiceRepository.save(entity);
+        // actualizar id del modelo de dominio con el id generado por la BD
+        if (saved != null && saved.getId() != null) {
+            invoice.setId(saved.getId());
+        }
     }
 
     @Override

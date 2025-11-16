@@ -14,7 +14,8 @@ public final class PatientVitalsMapper {
         if (domain.getId() > 0) {
             entity.setId(domain.getId());
         }
-        entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
+        // NO asignar patient aquí - el adapter lo resuelve desde BD
+        // entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
         entity.setRecordTimestamp(domain.getRecordTimestamp());
         entity.setBloodPressure(domain.getBloodPressure());
         entity.setTemperature(domain.getTemperature());

@@ -15,26 +15,25 @@ public final class ClinicalOrderMapper {
         if (domain.getId() > 0) {
             entity.setId(domain.getId());
         }
-        entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
-        entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
+        // NO asignar patient ni doctor aquí - el adapter lo resuelve desde BD
+        // entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
+        // entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
         entity.setCreationDate(domain.getCreationDate());
 
+        // NO asignar clinicalOrder en items aquí - el adapter lo hará después de persistir
         if (domain.getMedications() != null) {
             entity.setMedications(domain.getMedications().stream()
                 .map(MedicationMapper::toEntity)
-                .peek(medEntity -> medEntity.setClinicalOrder(entity)) 
                 .collect(Collectors.toList()));
         }
         if (domain.getProcedures() != null) {
             entity.setProcedures(domain.getProcedures().stream()
                 .map(ProcedureMapper::toEntity)
-                .peek(procEntity -> procEntity.setClinicalOrder(entity))
                 .collect(Collectors.toList()));
         }
         if (domain.getDiagnosticAids() != null) {
             entity.setDiagnosticAids(domain.getDiagnosticAids().stream()
                 .map(DiagnosticAidMapper::toEntity)
-                .peek(aidEntity -> aidEntity.setClinicalOrder(entity))
                 .collect(Collectors.toList()));
         }
         return entity;

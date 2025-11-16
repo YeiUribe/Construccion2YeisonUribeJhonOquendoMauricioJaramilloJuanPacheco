@@ -3,7 +3,7 @@ package app.adapter.rest.request;
 import java.time.LocalDateTime;
 
 public class VitalsRequest {
-    private Long patientId;
+    private String patientId;  // identificationNumber (String)
     private LocalDateTime recordTimestamp;
     private String bloodPressure;
     private double temperature;
@@ -12,8 +12,8 @@ public class VitalsRequest {
 
     public VitalsRequest() {}
 
-    public Long getPatientId() { return patientId; }
-    public void setPatientId(Long patientId) { this.patientId = patientId; }
+    public String getPatientId() { return patientId; }
+    public void setPatientId(String patientId) { this.patientId = patientId; }
 
     public LocalDateTime getRecordTimestamp() { return recordTimestamp; }
     public void setRecordTimestamp(LocalDateTime recordTimestamp) { this.recordTimestamp = recordTimestamp; }

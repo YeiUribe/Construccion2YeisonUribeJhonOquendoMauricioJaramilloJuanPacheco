@@ -14,14 +14,14 @@ public final class ClinicalRecordMapper {
         if (domain.getId() > 0) {
             entity.setId(domain.getId());
         }
-        entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
-        entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
+        // NO asignar patient ni doctor aquí - el adapter lo resuelve desde BD
+        // entity.setPatient(PatientMapper.toEntity(domain.getPatient()));
+        // entity.setDoctor(UserMapper.toEntity(domain.getDoctor()));
         entity.setRecordDate(domain.getRecordDate());
-        entity.setVitals(PatientVitalsMapper.toEntity(domain.getVitals()));
+        // NO asignar vitals y clinicalOrder - pueden ser null y crear entidades transitorias
         entity.setReasonForVisit(domain.getReasonForVisit());
         entity.setSymptoms(domain.getSymptoms());
         entity.setDiagnosis(domain.getDiagnosis());
-        entity.setClinicalOrder(ClinicalOrderMapper.toEntity(domain.getClinicalOrder()));
         return entity;
     }
 

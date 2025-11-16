@@ -146,8 +146,8 @@ curl --request POST \
 #### Request Body:
 ```json
 {
-  "patientId": 1,
-  "doctorId": 2,
+  "patientId": "1234567890",
+  "doctorId": "9876543210",
   "issueDate": "2025-11-12",
   "totalAmount": 150000.00
 }
@@ -178,8 +178,8 @@ curl --request POST \
   --url http://localhost:8080/api/admin/invoices \
   --header 'Content-Type: application/json' \
   --data '{
-  "patientId": 1,
-  "doctorId": 2,
+  "patientId": "1234567890",
+  "doctorId": "9876543210",
   "issueDate": "2025-11-12",
   "totalAmount": 150000.00
 }'
@@ -205,8 +205,8 @@ Base URL: `http://localhost:8080/api/doctor`
 #### Request Body:
 ```json
 {
-  "patientId": 1,
-  "doctorId": 2,
+  "patientId": "1234567890",
+  "doctorId": "9876543210",
   "recordDate": "2025-11-12",
   "reasonForVisit": "Dolor de espalda",
   "symptoms": "Dolor intenso en la región lumbar, rigidez matutina",
@@ -240,8 +240,8 @@ curl --request POST \
   --url http://localhost:8080/api/doctor/clinical-records \
   --header 'Content-Type: application/json' \
   --data '{
-  "patientId": 1,
-  "doctorId": 2,
+  "patientId": "1234567890",
+  "doctorId": "9876543210",
   "recordDate": "2025-11-12",
   "reasonForVisit": "Dolor de espalda",
   "symptoms": "Dolor intenso en la región lumbar, rigidez matutina",
@@ -265,8 +265,8 @@ curl --request POST \
 #### Request Body:
 ```json
 {
-  "patientId": 1,
-  "doctorId": 2,
+  "patientId": "1234567890",
+  "doctorId": "9876543210",
   "creationDate": "2025-11-12",
   "medications": [
     {
@@ -295,16 +295,7 @@ curl --request POST \
       "cost": 500000.00
     }
   ],
-  "diagnosticAids": [
-    {
-      "itemNumber": 1,
-      "name": "Laboratorio Básico",
-      "quantity": 1,
-      "requiresSpecialist": false,
-      "specialty": null,
-      "cost": 80000.00
-    }
-  ]
+  "diagnosticAids": []
 }
 ```
 
@@ -368,8 +359,8 @@ curl --request POST \
   --url http://localhost:8080/api/doctor/clinical-orders \
   --header 'Content-Type: application/json' \
   --data '{
-  "patientId": 1,
-  "doctorId": 2,
+  "patientId": "1234567890",
+  "doctorId": "9876543210",
   "creationDate": "2025-11-12",
   "medications": [
     {
@@ -391,16 +382,7 @@ curl --request POST \
       "cost": 500000.00
     }
   ],
-  "diagnosticAids": [
-    {
-      "itemNumber": 1,
-      "name": "Laboratorio Básico",
-      "quantity": 1,
-      "requiresSpecialist": false,
-      "specialty": null,
-      "cost": 80000.00
-    }
-  ]
+  "diagnosticAids": []
 }'
 ```
 
@@ -700,7 +682,7 @@ Base URL: `http://localhost:8080/api/nurse`
 #### Request Body:
 ```json
 {
-  "patientId": 1,
+  "patientId": "1234567890",
   "recordTimestamp": "2025-11-12T14:30:00",
   "bloodPressure": "120/80",
   "temperature": 37.2,
@@ -733,7 +715,7 @@ curl --request POST \
   --url http://localhost:8080/api/nurse/vitals \
   --header 'Content-Type: application/json' \
   --data '{
-  "patientId": 1,
+  "patientId": "1234567890",
   "recordTimestamp": "2025-11-12T14:30:00",
   "bloodPressure": "120/80",
   "temperature": 37.2,
@@ -817,18 +799,174 @@ curl --request POST \
 
 ## Consejos para Pruebas Efectivas
 
-### 1. Workflow Recomendado
+### 1. Workflow Recomendado — Paso a Paso Completo
+
+**Orden crítico (respeta las dependencias):**
+
+#### Paso 1: Crear Seguro
+```bash
+curl -X POST http://localhost:8080/api/support/insurances \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "companyName": "AXA Seguros Colombia",
+    "contactNumber": "+573111234567",
+    "active": true
+  }'
 ```
-1. Crear Seguro (soporte) → Guardar ID
-2. Crear Paciente (admin) → Referencia a seguro
-3. Contratar Médico (RRHH)
-4. Crear Medicamentos (soporte)
-5. Crear Procedimientos (soporte)
-6. Crear Registro Clínico (doctor)
-7. Crear Orden Clínica (doctor) → Referencia a medicamentos/procedimientos
-8. Generar Factura (admin)
-9. Registrar Vitales (nurse)
+**Guarda el ID de respuesta**, ej: `"id": 1`
+
+#### Paso 2: Crear Paciente (usa seguro del paso 1)
+```bash
+curl -X POST http://localhost:8080/api/admin/patients \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "identificationNumber": "1234567890",
+    "fullName": "Juan Carlos Pérez García",
+    "birthDate": "1985-03-15",
+    "gender": "M",
+    "address": "Calle 10 #20-30, Apartamento 501",
+    "phoneNumber": "+573001234567",
+    "email": "juan.perez@example.com",
+    "ecFullName": "María Elena García López",
+    "ecRelationship": "Esposa",
+    "ecPhoneNumber": "+573009876543",
+    "insuranceId": "1"
+  }'
 ```
+**Nota:** `identificationNumber` es la clave primaria del paciente (String). Úsala exactamente en los siguientes requests.
+
+#### Paso 3: Contratar Personal (Doctor)
+```bash
+curl -X POST http://localhost:8080/api/hr/staff \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "documentNumber": "9876543210",
+    "fullName": "Dr. Roberto López",
+    "email": "roberto.lopez@hospital.com",
+    "phoneNumber": "+573105551234",
+    "birthDate": "1975-07-10",
+    "address": "Calle 5 #10-20",
+    "username": "rlopez",
+    "password": "Password1!",
+    "role": "DOCTOR"
+  }'
+```
+**Nota:** `documentNumber` es la clave primaria del usuario. Guarda exactamente este valor.
+
+#### Paso 4: Crear Medicamentos (sin dependencias)
+```bash
+curl -X POST http://localhost:8080/api/support/medications \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Ibuprofeno 400mg",
+    "cost": 25000.00
+  }'
+```
+Puedes crear múltiples medicamentos; guarda los nombres exactamente.
+
+#### Paso 5: Crear Procedimientos (sin dependencias)
+```bash
+curl -X POST http://localhost:8080/api/support/procedures \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Resonancia Magnética Columna",
+    "cost": 500000.00
+  }'
+```
+
+#### Paso 6: Crear Ayudas Diagnósticas (sin dependencias)
+```bash
+curl -X POST http://localhost:8080/api/support/diagnostic-aids \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Laboratorio Básico",
+    "cost": 80000.00
+  }'
+```
+
+#### Paso 7: Crear Registro Clínico (usa paciente del paso 2 + doctor del paso 3)
+```bash
+curl -X POST http://localhost:8080/api/doctor/clinical-records \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patientId": "1234567890",
+    "doctorId": "9876543210",
+    "recordDate": "2025-11-12",
+    "reasonForVisit": "Dolor de espalda",
+    "symptoms": "Dolor intenso en la región lumbar",
+    "diagnosis": "Lumbago agudo"
+  }'
+```
+**Importante:** usa `identificationNumber` del paciente y `documentNumber` del doctor.
+
+#### Paso 8: Crear Orden Clínica (usa paciente + doctor + medicamentos/procedimientos)
+```bash
+curl -X POST http://localhost:8080/api/doctor/clinical-orders \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patientId": "1234567890",
+    "doctorId": "9876543210",
+    "creationDate": "2025-11-12",
+    "medications": [
+      {
+        "itemNumber": 1,
+        "name": "Ibuprofeno 400mg",
+        "dosage": "400mg",
+        "duration": "10 días",
+        "cost": 25000.00
+      }
+    ],
+    "procedures": [
+      {
+        "itemNumber": 1,
+        "name": "Resonancia Magnética Columna",
+        "repetitionCount": 1,
+        "frequency": "Una sola vez",
+        "requiresSpecialist": true,
+        "specialty": "RADIOLOGIA",
+        "cost": 500000.00
+      }
+    ],
+    "diagnosticAids": []
+  }'
+```
+**Importante:** Una orden clínica NO puede tener diagnósticAids si también contiene medicamentos o procedimientos. Elige uno u otro.
+
+#### Paso 9: Generar Factura (usa paciente del paso 2 + doctor del paso 3)
+```bash
+curl -X POST http://localhost:8080/api/admin/invoices \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patientId": "1234567890",
+    "doctorId": "9876543210",
+    "issueDate": "2025-11-12",
+    "totalAmount": 150000.00
+  }'
+```
+**Crítico:** usa exactamente `identificationNumber` del paciente y `documentNumber` del doctor. Si no existen en BD, recibirás error 500 con mensaje "Paciente no encontrado" o "Doctor no encontrado".
+
+#### Paso 10: Registrar Vitales del Paciente (usa paciente del paso 2)
+```bash
+curl -X POST http://localhost:8080/api/nurse/vitals \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patientId": "1234567890",
+    "recordTimestamp": "2025-11-12T14:30:00",
+    "bloodPressure": "120/80",
+    "temperature": 37.2,
+    "pulse": 72,
+    "oxygenLevel": 98.5
+  }'
+```
+
+---
+
+### Notas Críticas de Identificadores
+
+- **Pacientes:** La clave primaria es `identificationNumber` (String, ej: "1234567890")
+- **Usuarios/Doctores/Staff:** La clave primaria es `documentNumber` (String, ej: "9876543210")
+- **Facturas, Órdenes, Registros:** Usa EXACTAMENTE estos valores de PK al crear referencias
+- Si intentas crear una factura con un paciente/doctor que no existe, recibirás error 500 con descripción clara
 
 ### 2. Usando Variables en Thunder Client
 Para reutilizar IDs:
@@ -883,3 +1021,440 @@ Para reportar errores o hacer preguntas sobre los endpoints:
 - Asegúrate de tener el environment "Local" seleccionado en Thunder Client
 
 ¡Listo para empezar a probar! 🚀
+
+---
+
+# PRUEBA COMPLETA CON DATOS NUEVOS
+
+Esta sección contiene un flujo de prueba completo con datos diferentes para verificar todas las funcionalidades del sistema.
+
+## Datos de Prueba
+
+- **Paciente 2:** Identificación: `9876543210`, Nombre: `María José López Martínez`
+- **Doctor 2:** Documento: `1112223334`, Nombre: `Dra. Ana María García López`
+- **Seguro 2:** `Seguros Suramericana`
+
+---
+
+## Flujo Completo de Prueba
+
+### Paso 1: Crear Segundo Seguro
+```bash
+curl -X POST http://localhost:8080/api/support/insurances \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "companyName": "Seguros Suramericana",
+    "contactNumber": "+573215551234",
+    "active": true
+  }'
+```
+
+**Guarda el ID de respuesta**, ej: `"id": 2`
+
+---
+
+### Paso 2: Crear Segundo Paciente
+```bash
+curl -X POST http://localhost:8080/api/admin/patients \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "identificationNumber": "9876543210",
+    "fullName": "María José López Martínez",
+    "birthDate": "1990-08-22",
+    "gender": "F",
+    "address": "Avenida Paseo de los Libertadores #50-30, Apartamento 1202",
+    "phoneNumber": "+573209876543",
+    "email": "maria.lopez@example.com",
+    "ecFullName": "Carlos Alberto López García",
+    "ecRelationship": "Hermano",
+    "ecPhoneNumber": "+573105551111",
+    "insuranceId": "2"
+  }'
+```
+
+**Guarda:** `identificationNumber = "9876543210"`
+
+**Respuesta esperada (201 Created):**
+```json
+{
+  "success": true,
+  "data": {
+    "identificationNumber": "9876543210",
+    "fullName": "María José López Martínez",
+    "birthDate": "1990-08-22",
+    "gender": "F",
+    "address": "Avenida Paseo de los Libertadores #50-30, Apartamento 1202",
+    "phoneNumber": "+573209876543",
+    "email": "maria.lopez@example.com",
+    "emergencyContactName": "Carlos Alberto López García",
+    "emergencyContactPhone": "+573105551111",
+    "emergencyContactRelationship": "Hermano",
+    "insuranceCompany": "Seguros Suramericana",
+    "insurancePolicyNumber": "2",
+    "insuranceActive": true
+  },
+  "message": "Paciente registrado exitosamente",
+  "errors": null
+}
+```
+
+---
+
+### Paso 3: Contratar Segunda Doctora
+```bash
+curl -X POST http://localhost:8080/api/hr/staff \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "documentNumber": "1112223334",
+    "fullName": "Dra. Ana María García López",
+    "email": "ana.garcia@hospital.com",
+    "phoneNumber": "+573125559876",
+    "birthDate": "1982-11-05",
+    "address": "Calle 7 #30-50, Apartamento 501",
+    "username": "agarcia",
+    "password": "SecurePass456!",
+    "role": "DOCTOR"
+  }'
+```
+
+**Guarda:** `documentNumber = "1112223334"`
+
+**Respuesta esperada (201 Created):**
+```json
+{
+  "success": true,
+  "data": {
+    "documentNumber": "1112223334",
+    "fullName": "Dra. Ana María García López",
+    "email": "ana.garcia@hospital.com",
+    "phoneNumber": "+573125559876",
+    "birthDate": "1982-11-05",
+    "address": "Calle 7 #30-50, Apartamento 501",
+    "role": "DOCTOR",
+    "username": "agarcia"
+  },
+  "message": "Personal contratado exitosamente",
+  "errors": null
+}
+```
+
+---
+
+### Paso 4: Crear Medicamento 2
+```bash
+curl -X POST http://localhost:8080/api/support/medications \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Amoxicilina 500mg",
+    "cost": 35000.00
+  }'
+```
+
+**Respuesta esperada:**
+```json
+{
+  "success": true,
+  "data": {
+    "itemNumber": 2,
+    "name": "Amoxicilina 500mg",
+    "dosage": null,
+    "duration": null,
+    "cost": 35000.00
+  },
+  "message": "Medicamento creado exitosamente",
+  "errors": null
+}
+```
+
+---
+
+### Paso 5: Crear Procedimiento 2
+```bash
+curl -X POST http://localhost:8080/api/support/procedures \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Tomografía de Tórax",
+    "cost": 450000.00
+  }'
+```
+
+**Respuesta esperada:**
+```json
+{
+  "success": true,
+  "data": {
+    "itemNumber": 2,
+    "name": "Tomografía de Tórax",
+    "repetitionCount": 0,
+    "frequency": null,
+    "requiresSpecialist": false,
+    "specialty": null,
+    "cost": 450000.00
+  },
+  "message": "Procedimiento creado exitosamente",
+  "errors": null
+}
+```
+
+---
+
+### Paso 6: Crear Ayuda Diagnóstica 2
+```bash
+curl -X POST http://localhost:8080/api/support/diagnostic-aids \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "name": "Radiografía de Tórax",
+    "cost": 120000.00
+  }'
+```
+
+**Respuesta esperada:**
+```json
+{
+  "success": true,
+  "data": {
+    "itemNumber": 2,
+    "name": "Radiografía de Tórax",
+    "quantity": 0,
+    "requiresSpecialist": false,
+    "specialty": null,
+    "cost": 120000.00
+  },
+  "message": "Ayuda diagnóstica creada exitosamente",
+  "errors": null
+}
+```
+
+---
+
+### Paso 7: Crear Registro Clínico 2
+```bash
+curl -X POST http://localhost:8080/api/doctor/clinical-records \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patientId": "9876543210",
+    "doctorId": "1112223334",
+    "recordDate": "2025-11-16",
+    "reasonForVisit": "Control de presión arterial",
+    "symptoms": "Presión elevada, ligero mareo ocasional",
+    "diagnosis": "Hipertensión arterial en tratamiento"
+  }'
+```
+
+**Respuesta esperada (201 Created):**
+```json
+{
+  "success": true,
+  "data": {
+    "id": 51,
+    "patientId": "9876543210",
+    "patientName": "María José López Martínez",
+    "doctorId": "1112223334",
+    "doctorName": "Dra. Ana María García López",
+    "recordDate": "2025-11-16",
+    "reasonForVisit": "Control de presión arterial",
+    "symptoms": "Presión elevada, ligero mareo ocasional",
+    "diagnosis": "Hipertensión arterial en tratamiento"
+  },
+  "message": "Registro clínico creado exitosamente",
+  "errors": null
+}
+```
+
+---
+
+### Paso 8: Crear Orden Clínica 2 (Con Medicamentos y Procedimientos)
+```bash
+curl -X POST http://localhost:8080/api/doctor/clinical-orders \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patientId": "9876543210",
+    "doctorId": "1112223334",
+    "creationDate": "2025-11-16",
+    "medications": [
+      {
+        "itemNumber": 1,
+        "name": "Amoxicilina 500mg",
+        "dosage": "500mg",
+        "duration": "7 días",
+        "cost": 35000.00
+      },
+      {
+        "itemNumber": 2,
+        "name": "Losartán 50mg",
+        "dosage": "50mg",
+        "duration": "30 días",
+        "cost": 25000.00
+      }
+    ],
+    "procedures": [
+      {
+        "itemNumber": 1,
+        "name": "Tomografía de Tórax",
+        "repetitionCount": 1,
+        "frequency": "Una sola vez",
+        "requiresSpecialist": true,
+        "specialty": "RADIOLOGIA",
+        "cost": 450000.00
+      }
+    ],
+    "diagnosticAids": []
+  }'
+```
+
+**Respuesta esperada (201 Created):**
+```json
+{
+  "success": true,
+  "data": {
+    "id": 26,
+    "patientId": "9876543210",
+    "patientName": "María José López Martínez",
+    "doctorId": "1112223334",
+    "doctorName": "Dra. Ana María García López",
+    "creationDate": "2025-11-16",
+    "medications": [
+      {
+        "itemNumber": 1,
+        "name": "Amoxicilina 500mg",
+        "dosage": "500mg",
+        "duration": "7 días",
+        "cost": 35000.00
+      },
+      {
+        "itemNumber": 2,
+        "name": "Losartán 50mg",
+        "dosage": "50mg",
+        "duration": "30 días",
+        "cost": 25000.00
+      }
+    ],
+    "procedures": [
+      {
+        "itemNumber": 1,
+        "name": "Tomografía de Tórax",
+        "repetitionCount": 1,
+        "frequency": "Una sola vez",
+        "requiresSpecialist": true,
+        "specialty": "RADIOLOGIA",
+        "cost": 450000.00
+      }
+    ],
+    "diagnosticAids": []
+  },
+  "message": "Orden clínica creada exitosamente",
+  "errors": null
+}
+```
+
+---
+
+### Paso 9: Generar Factura 2
+```bash
+curl -X POST http://localhost:8080/api/admin/invoices \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patientId": "9876543210",
+    "doctorId": "1112223334",
+    "issueDate": "2025-11-16",
+    "totalAmount": 300000.00
+  }'
+```
+
+**Respuesta esperada (201 Created):**
+```json
+{
+  "success": true,
+  "data": {
+    "id": 102,
+    "issueDate": "2025-11-16",
+    "patientId": "9876543210",
+    "patientName": "María José López Martínez",
+    "doctorId": "1112223334",
+    "doctorName": "Dra. Ana María García López",
+    "totalAmount": 300000.00,
+    "copayAmount": 60000.00
+  },
+  "message": "Factura generada exitosamente",
+  "errors": null
+}
+```
+
+---
+
+### Paso 10: Registrar Vitales 2
+```bash
+curl -X POST http://localhost:8080/api/nurse/vitals \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patientId": "9876543210",
+    "recordTimestamp": "2025-11-16T10:45:00",
+    "bloodPressure": "145/90",
+    "temperature": 36.5,
+    "pulse": 78,
+    "oxygenLevel": 97.5
+  }'
+```
+
+**Respuesta esperada (201 Created):**
+```json
+{
+  "success": true,
+  "data": {
+    "id": 46,
+    "patientId": "9876543210",
+    "recordTimestamp": "2025-11-16T10:45:00",
+    "bloodPressure": "145/90",
+    "temperature": 36.5,
+    "pulse": 78,
+    "oxygenLevel": 97.5
+  },
+  "message": "Vitales registrados exitosamente",
+  "errors": null
+}
+```
+
+---
+
+## Validación de Prueba Completa
+
+✅ **Seguro Creado:** Seguros Suramericana (ID: 2)
+✅ **Paciente Creado:** María José López Martínez (9876543210)
+✅ **Doctor Creado:** Dra. Ana María García López (1112223334)
+✅ **Medicamentos Creados:** Amoxicilina 500mg, Losartán 50mg
+✅ **Procedimientos Creados:** Tomografía de Tórax
+✅ **Ayudas Diagnósticas Creadas:** Radiografía de Tórax
+✅ **Registro Clínico Creado:** Control de presión arterial
+✅ **Orden Clínica Creada:** Con medicamentos y procedimientos
+✅ **Factura Generada:** $300,000 COP
+✅ **Vitales Registrados:** PA 145/90, FC 78, Temp 36.5°C, O₂ 97.5%
+
+---
+
+## Flujo Alternativo: Orden Clínica SOLO con Diagnósticos
+
+Si prefieres crear una orden SOLO con ayudas diagnósticas (sin medicamentos ni procedimientos):
+
+```bash
+curl -X POST http://localhost:8080/api/doctor/clinical-orders \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "patientId": "9876543210",
+    "doctorId": "1112223334",
+    "creationDate": "2025-11-16",
+    "medications": [],
+    "procedures": [],
+    "diagnosticAids": [
+      {
+        "itemNumber": 1,
+        "name": "Radiografía de Tórax",
+        "quantity": 1,
+        "requiresSpecialist": false,
+        "specialty": null,
+        "cost": 120000.00
+      }
+    ]
+  }'
+```
+
+**Nota importante:** Una orden clínica NO puede tener AMBOS medicamentos/procedimientos Y diagnósticos simultáneamente.

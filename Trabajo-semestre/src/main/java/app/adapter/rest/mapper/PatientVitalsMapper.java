@@ -22,6 +22,14 @@ public class PatientVitalsMapper {
     public static PatientVitals fromRequest(VitalsRequest req) {
         if (req == null) return null;
         PatientVitals v = new PatientVitals();
+        
+        // Crear Patient con identificationNumber
+        if (req.getPatientId() != null) {
+            Patient p = new Patient();
+            p.setIdentificationNumber(req.getPatientId());
+            v.setPatient(p);
+        }
+        
         v.setRecordTimestamp(req.getRecordTimestamp());
         v.setBloodPressure(req.getBloodPressure());
         v.setTemperature(req.getTemperature());

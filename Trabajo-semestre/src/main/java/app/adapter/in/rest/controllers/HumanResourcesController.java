@@ -1,6 +1,8 @@
 package app.adapter.in.rest.controllers;
 
 import app.adapter.rest.mapper.UserMapper;
+import app.adapter.in.validators.UserValidator;
+import java.time.LocalDate;
 import app.adapter.rest.request.UserRequest;
 import app.adapter.rest.response.ApiResponse;
 import app.adapter.rest.response.UserResponse;
@@ -22,10 +24,35 @@ public class HumanResourcesController {
     @Autowired
     private HumanResourcesUseCase humanResourcesUseCase;
 
+    @Autowired
+    private UserValidator userValidator;
+
     @PostMapping("/staff")
     public ResponseEntity<ApiResponse<UserResponse>> hireStaff(@RequestBody UserRequest request) {
         try {
-            User user = UserMapper.fromRequest(request);
+            // Validar campos de entrada antes de mapear al dominio
+            String documentNumber = userValidator.documentValidator(request.getDocumentNumber());
+            String fullName = userValidator.nameValidator(request.getFullName());
+            String email = userValidator.emailValidator(request.getEmail());
+            String phone = null;
+            if (request.getPhoneNumber() != null) phone = userValidator.phoneValidator(request.getPhoneNumber());
+            LocalDate birthDate = null;
+            if (request.getBirthDate() != null) birthDate = userValidator.dateValidator(request.getBirthDate());
+            String address = null;
+            if (request.getAddress() != null) address = userValidator.addressValidator(request.getAddress());
+            String username = userValidator.usernameValidator(request.getUsername());
+            String password = userValidator.passwordValidator(request.getPassword());
+
+            User user = new User();
+            user.setDocumentNumber(documentNumber);
+            user.setFullName(fullName);
+            user.setEmail(email);
+            user.setPhoneNumber(phone);
+            user.setBirthDate(birthDate);
+            user.setAddress(address);
+            user.setUsername(username);
+            user.setPassword(password);
+
             User createdUser = humanResourcesUseCase.hireStaff(user, request.getRole());
             UserResponse response = UserMapper.toResponse(createdUser);
             return ResponseEntity.status(HttpStatus.CREATED)

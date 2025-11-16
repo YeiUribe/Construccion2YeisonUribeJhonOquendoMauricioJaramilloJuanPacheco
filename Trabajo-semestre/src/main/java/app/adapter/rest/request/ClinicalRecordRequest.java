@@ -3,8 +3,8 @@ package app.adapter.rest.request;
 import java.time.LocalDate;
 
 public class ClinicalRecordRequest {
-    private Long patientId;
-    private Long doctorId;
+    private String patientId;  // identificationNumber (String)
+    private String doctorId;   // documentNumber (String)
     private LocalDate recordDate;
     private String reasonForVisit;
     private String symptoms;
@@ -12,11 +12,11 @@ public class ClinicalRecordRequest {
 
     public ClinicalRecordRequest() {}
 
-    public Long getPatientId() { return patientId; }
-    public void setPatientId(Long patientId) { this.patientId = patientId; }
+    public String getPatientId() { return patientId; }
+    public void setPatientId(String patientId) { this.patientId = patientId; }
 
-    public Long getDoctorId() { return doctorId; }
-    public void setDoctorId(Long doctorId) { this.doctorId = doctorId; }
+    public String getDoctorId() { return doctorId; }
+    public void setDoctorId(String doctorId) { this.doctorId = doctorId; }
 
     public LocalDate getRecordDate() { return recordDate; }
     public void setRecordDate(LocalDate recordDate) { this.recordDate = recordDate; }
