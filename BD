@@ -1,0 +1,480 @@
+{
+	"info": {
+		"_postman_id": "b495b43a-8754-487c-bf10-f0cef201b822",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50100972",
+		"_collection_link": "https://jhon-fernando-oquendo-h-9861095.postman.co/workspace/Jhon-Oquendo's-Workspace~a7952bf5-4b02-4f08-8dd0-57a2b9d61a62/collection/50100972-b495b43a-8754-487c-bf10-f0cef201b822?action=share&source=collection_link&creator=50100972"
+	},
+	"item": [
+		{
+			"name": "Crear Aseguradora",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyName\": \"Seguros Suramericana\",\n    \"contactNumber\": \"+573215551234\",\n    \"active\": true\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/support/insurances",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"support",
+						"insurances"
+					]
+				},
+				"description": "Generated from cURL: curl --request POST \\\n  --url http://localhost:8080/api/support/insurances \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"companyName\": \"AXA Seguros Colombia\",\n  \"contactNumber\": \"+573111234567\",\n  \"active\": true\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar paciente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZ2FyY2lhIiwicm9sZXMiOlsiQURNSU5JU1RSQVRJVkVfU1RBRkYiXSwiaWF0IjoxNzYzNDEyNTY4LCJleHAiOjE3NjM0MTI4Njh9.mhL8UJBRZOU6BrIpU8_fvkvH7p2WbhsaR0oBa0y3LFE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"identificationNumber\": \"9876543210\",\n    \"fullName\": \"María José López Martínez\",\n    \"birthDate\": \"1990-08-22\",\n    \"gender\": \"F\",\n    \"address\": \"Avenida Paseo de los Libertadores #50-30, Apartamento 1202\",\n    \"phoneNumber\": \"+573209876543\",\n    \"email\": \"maria.lopez@example.com\",\n    \"ecFullName\": \"Carlos Alberto López García\",\n    \"ecRelationship\": \"Hermano\",\n    \"ecPhoneNumber\": \"+573105551111\",\n    \"insuranceId\": \"2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/admin/patients",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"patients"
+					]
+				},
+				"description": "Generated from cURL: curl --request POST \\\n  --url http://localhost:8080/api/admin/patients \\\n  --header 'Content-Type: application/json' \\\n  --data '{\n  \"identificationNumber\": \"1234567890\",\n  \"fullName\": \"Juan Carlos Pérez García\",\n  \"birthDate\": \"1985-03-15\",\n  \"gender\": \"M\",\n  \"address\": \"Calle 10 #20-30, Apartamento 501\",\n  \"phoneNumber\": \"+573001234567\",\n  \"email\": \"juan.perez@example.com\",\n  \"ecFullName\": \"María Elena García López\",\n  \"ecRelationship\": \"Esposa\",\n  \"ecPhoneNumber\": \"+573009876543\",\n  \"insuranceId\": \"1\"\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear staff",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"documentNumber\": \"999888777\",\r\n    \"fullName\": \"Admin Usuario\",\r\n    \"email\": \"admin@example.com\",\r\n    \"phoneNumber\": \"3001112222\",\r\n    \"birthDate\": \"1980-01-01\",\r\n    \"address\": \"Oficina 1\",\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin123\",\r\n    \"role\": \"ADMINISTRATIVE_STAFF\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/hr/staff",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"hr",
+						"staff"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/hr/staff \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\"documentNumber\":\"98765432\",\"fullName\":\"Dra. Sandra Martínez\",\"email\":\"sandra@hospital.com\",\"phoneNumber\":\"+573115559876\",\"birthDate\":\"1980-06-20\",\"address\":\"Carrera 5\",\"username\":\"smartinez\",\"password\":\"SecurePassword123!\",\"role\":\"DOCTOR\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Medicamento",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Amoxicilina 500mg\",\r\n    \"cost\": 35000.00\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/support/medications",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"support",
+						"medications"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/support/medications \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\"name\":\"Amoxicilina 500mg\",\"cost\":45000.00}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Procedimiento",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Tomografía de Tórax\",\r\n    \"cost\": 450000.00\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/support/procedures",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"support",
+						"procedures"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/support/procedures \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"name\": \"Resonancia Magnética Columna\",\r\n    \"cost\": 500000.00\r\n  }'"
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar vitales",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"patientId\":1,\"recordTimestamp\":\"2025-11-12T14:30:00\",\"bloodPressure\":\"120/80\",\"temperature\":37.2,\"pulse\":72,\"oxygenLevel\":98.5}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/nurse/vitals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"nurse",
+						"vitals"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/nurse/vitals \\\r\n-H \"Content-Type: application/json\" \\\r\n-d '{\"patientId\":1,\"recordTimestamp\":\"2025-11-12T14:30:00\",\"bloodPressure\":\"120/80\",\"temperature\":37.2,\"pulse\":72,\"oxygenLevel\":98.5}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Ayudas Diagnosticas",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Radiografía de Tórax\",\r\n    \"cost\": 120000.00\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/support/diagnostic-aids",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"support",
+						"diagnostic-aids"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/support/diagnostic-aids \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"name\": \"Laboratorio Básico\",\r\n    \"cost\": 80000.00\r\n  }'"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Registro Clinico",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"patientId\": \"9876543210\",\r\n    \"doctorId\": \"1112223334\",\r\n    \"recordDate\": \"2025-11-16\",\r\n    \"reasonForVisit\": \"Control de presión arterial\",\r\n    \"symptoms\": \"Presión elevada, ligero mareo ocasional\",\r\n    \"diagnosis\": \"Hipertensión arterial en tratamiento\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/doctor/clinical-records",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"doctor",
+						"clinical-records"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/doctor/clinical-records \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"patientId\": \"1234567890\",\r\n    \"doctorId\": \"9876543210\",\r\n    \"recordDate\": \"2025-11-12\",\r\n    \"reasonForVisit\": \"Dolor de espalda\",\r\n    \"symptoms\": \"Dolor intenso en la región lumbar\",\r\n    \"diagnosis\": \"Lumbago agudo\"\r\n  }'"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Orden",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"patientId\": \"9876543210\",\r\n    \"doctorId\": \"1112223334\",\r\n    \"creationDate\": \"2025-11-16\",\r\n    \"medications\": [\r\n      {\r\n        \"itemNumber\": 1,\r\n        \"name\": \"Amoxicilina 500mg\",\r\n        \"dosage\": \"500mg\",\r\n        \"duration\": \"7 días\",\r\n        \"cost\": 35000.00\r\n      },\r\n      {\r\n        \"itemNumber\": 2,\r\n        \"name\": \"Losartán 50mg\",\r\n        \"dosage\": \"50mg\",\r\n        \"duration\": \"30 días\",\r\n        \"cost\": 25000.00\r\n      }\r\n    ],\r\n    \"procedures\": [\r\n      {\r\n        \"itemNumber\": 3,\r\n        \"name\": \"Tomografía de Tórax\",\r\n        \"repetitionCount\": 1,\r\n        \"frequency\": \"Una sola vez\",\r\n        \"requiresSpecialist\": true,\r\n        \"specialty\": \"RADIOLOGIA\",\r\n        \"cost\": 450000.00\r\n      }\r\n    ],\r\n    \"diagnosticAids\": []\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/doctor/clinical-orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"doctor",
+						"clinical-orders"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/doctor/clinical-orders \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"patientId\": \"1234567890\",\r\n    \"doctorId\": \"9876543210\",\r\n    \"creationDate\": \"2025-11-12\",\r\n    \"medications\": [\r\n      {\r\n        \"itemNumber\": 1,\r\n        \"name\": \"Ibuprofeno 400mg\",\r\n        \"dosage\": \"400mg\",\r\n        \"duration\": \"10 días\",\r\n        \"cost\": 25000.00\r\n      }\r\n    ],\r\n    \"procedures\": [\r\n      {\r\n        \"itemNumber\": 1,\r\n        \"name\": \"Resonancia Magnética Columna\",\r\n        \"repetitionCount\": 1,\r\n        \"frequency\": \"Una sola vez\",\r\n        \"requiresSpecialist\": true,\r\n        \"specialty\": \"RADIOLOGIA\",\r\n        \"cost\": 500000.00\r\n      }\r\n    ],\r\n    \"diagnosticAids\": [\r\n      {\r\n        \"itemNumber\": 1,\r\n        \"name\": \"Laboratorio Básico\",\r\n        \"quantity\": 1,\r\n        \"requiresSpecialist\": false,\r\n        \"specialty\": null,\r\n        \"cost\": 80000.00\r\n      }\r\n    ]\r\n  }'"
+			},
+			"response": []
+		},
+		{
+			"name": "Generar Factura",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"patientId\": \"9876543210\",\r\n    \"doctorId\": \"1112223334\",\r\n    \"issueDate\": \"2025-11-16\",\r\n    \"totalAmount\": 300000.00\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/admin/invoices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"invoices"
+					]
+				},
+				"description": "Generated from cURL: curl --request POST \\\r\n  --url http://localhost:8080/api/admin/invoices \\\r\n  --header 'Content-Type: application/json' \\\r\n  --data '{\r\n  \"patientId\": 1,\r\n  \"doctorId\": 2,\r\n  \"issueDate\": \"2025-11-12\",\r\n  \"totalAmount\": 150000.00\r\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Vitales",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"patientId\": \"9876543210\",\r\n    \"recordTimestamp\": \"2025-11-16T10:45:00\",\r\n    \"bloodPressure\": \"145/90\",\r\n    \"temperature\": 36.5,\r\n    \"pulse\": 78,\r\n    \"oxygenLevel\": 97.5\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/nurse/vitals",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"nurse",
+						"vitals"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/nurse/vitals \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\r\n    \"patientId\": \"1234567890\",\r\n    \"recordTimestamp\": \"2025-11-12T14:30:00\",\r\n    \"bloodPressure\": \"120/80\",\r\n    \"temperature\": 37.2,\r\n    \"pulse\": 72,\r\n    \"oxygenLevel\": 98.5\r\n  }'"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"agarcia\",\"password\":\"SecurePass456!\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8080/api/auth/login \\\r\n  -H 'Content-Type: application/json' \\\r\n  -d '{\"username\":\"agarcia\",\"password\":\"SecurePass456!\"}'"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
