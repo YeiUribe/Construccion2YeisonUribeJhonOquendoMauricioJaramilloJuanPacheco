@@ -69,4 +69,55 @@ public class HumanResourcesController {
                 .body(ApiResponse.error("Error interno del servidor", null));
         }
     }
+
+        @PostMapping("/staff/update")
+        @org.springframework.security.access.prepost.PreAuthorize("hasRole('ADMINISTRATIVE_STAFF') or hasRole('HUMAN_RESOURCES')")
+        public ResponseEntity<ApiResponse<UserResponse>> updateStaff(@RequestBody UserRequest request) {
+            try {
+                // Validar campos igual que en hireStaff
+                String documentNumber = userValidator.documentValidator(request.getDocumentNumber());
+                String fullName = userValidator.nameValidator(request.getFullName());
+                String phone = null;
+                if (request.getPhoneNumber() != null) phone = userValidator.phoneValidator(request.getPhoneNumber());
+                String address = null;
+                if (request.getAddress() != null) address = userValidator.addressValidator(request.getAddress());
+
+                User user = new User();
+                user.setDocumentNumber(documentNumber);
+                user.setFullName(fullName);
+                user.setPhoneNumber(phone);
+                user.setAddress(address);
+
+                User updatedUser = humanResourcesUseCase.updateStaffInformation(user);
+                UserResponse response = UserMapper.toResponse(updatedUser);
+                return ResponseEntity.status(HttpStatus.OK)
+                    .body(ApiResponse.ok(response, "Personal actualizado exitosamente"));
+            } catch (InputsException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.error(e.getMessage(), null));
+            } catch (IllegalStateException e) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(ApiResponse.error(e.getMessage(), null));
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.error("Error interno del servidor", null));
+            }
+        }
+
+        @PostMapping("/staff/delete")
+        @org.springframework.security.access.prepost.PreAuthorize("hasRole('ADMINISTRATIVE_STAFF')")
+        public ResponseEntity<ApiResponse<Void>> deleteStaff(@RequestBody UserRequest request) {
+            try {
+                String documentNumber = userValidator.documentValidator(request.getDocumentNumber());
+                humanResourcesUseCase.terminateStaff(documentNumber);
+                return ResponseEntity.status(HttpStatus.OK)
+                    .body(ApiResponse.ok(null, "Personal eliminado exitosamente"));
+            } catch (InputsException e) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(ApiResponse.error(e.getMessage(), null));
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(ApiResponse.error("Error interno del servidor", null));
+            }
+        }
 }

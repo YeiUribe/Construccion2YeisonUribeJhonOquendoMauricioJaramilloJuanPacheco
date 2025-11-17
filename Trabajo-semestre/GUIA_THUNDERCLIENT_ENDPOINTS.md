@@ -1458,3 +1458,185 @@ curl -X POST http://localhost:8080/api/doctor/clinical-orders \
 ```
 
 **Nota importante:** Una orden clínica NO puede tener AMBOS medicamentos/procedimientos Y diagnósticos simultáneamente.
+
+---
+
+## Endpoints de RRHH: Actualizar y Eliminar Personal
+
+### Actualizar Personal
+
+**JSON ejemplo:**
+```json
+{
+  "documentNumber": "1112223334",
+  "fullName": "Dra. Ana María García López",
+  "phoneNumber": "3216549870",
+  "address": "Calle 123 #45-67, Medellín"
+}
+```
+
+**Curl:**
+```bash
+curl -X POST http://localhost:8080/api/hr/staff/update \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "documentNumber": "1112223334",
+    "fullName": "Dra. Ana María García López",
+    "phoneNumber": "3216549870",
+    "address": "Calle 123 #45-67, Medellín"
+  }'
+```
+
+### Login (JWT)
+
+**JSON ejemplo (admin existente):**
+```json
+{
+  "username": "agarcia",
+  "password": "SecurePass456!"
+}
+```
+
+**Curl (login admin existente):**
+```bash
+curl -X POST http://localhost:8080/api/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"agarcia","password":"SecurePass456!"}'
+```
+
+La respuesta contendrá el token y `expiresIn` (ms). Usa el token en la cabecera `Authorization: Bearer <token>` para llamadas autenticadas.
+
+---
+
+**Prueba paso a paso (compilar + login + uso del token)**
+
+1) Compilar y ejecutar la aplicación
+
+```powershell
+# Desde la carpeta raíz del proyecto
+.\mvnw clean package -DskipTests
+.\mvnw spring-boot:run
+# o ejecutar el JAR generado
+# java -jar .\target\Trabajo-semestre-0.0.1-SNAPSHOT.jar
+```
+
+2) Crear usuarios necesarios (admin / rrhh)
+
+Puedes crear usuarios usando el endpoint de RRHH `/api/hr/staff`. El payload debe seguir la estructura de `UserRequest`.
+
+Nota: El usuario administrador ya existe en el sistema. Usa las credenciales siguientes para las pruebas (no es necesario crear otro admin):
+
+```json
+{
+  "documentNumber": "1112223334",
+  "fullName": "Dra. Ana María García López",
+  "email": "ana.garcia@hospital.com",
+  "phoneNumber": "3125559876",
+  "birthDate": "1982-11-05",
+  "address": "Calle 7 #30-50",
+  "username": "agarcia",
+  "password": "SecurePass456!",
+  "role": "ADMINISTRATIVE_STAFF"
+}
+```
+Usa `username: agarcia` y `password: SecurePass456!` para hacer login como administrador.
+
+Ejemplo: crear un usuario de `HUMAN_RESOURCES` (RRHH)
+
+```bash
+curl -X POST http://localhost:8080/api/hr/staff \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "documentNumber": "1112223334",
+    "fullName": "RRHH Usuario",
+    "email": "rrhh@example.com",
+    "phoneNumber": "3003334444",
+    "birthDate": "1990-05-05",
+    "address": "Oficina RRHH",
+    "username": "rrhh",
+    "password": "rrhh123",
+    "role": "HUMAN_RESOURCES"
+  }'
+```
+
+3) Hacer login para obtener el token
+
+```bash
+curl -X POST http://localhost:8080/api/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"agarcia","password":"SecurePass456!"}'
+```
+
+Respuesta esperada (ejemplo):
+
+```json
+{
+  "success": true,
+  "data": {
+    "token": "eyJhbGciOi...",
+    "expiresIn": 300000
+  },
+  "message": "Login exitoso",
+  "errors": null
+}
+```
+
+4) Usar el token en llamadas autenticadas
+
+Ejemplo: actualizar personal (requiere `HUMAN_RESOURCES` o `ADMINISTRATIVE_STAFF`)
+
+```bash
+curl -X POST http://localhost:8080/api/hr/staff/update \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <token>' \
+  -d '{
+    "documentNumber": "1112223334",
+    "fullName": "RRHH Usuario Actualizado",
+    "phoneNumber": "3150001111",
+    "address": "Nueva dirección"
+  }'
+```
+
+Ejemplo: eliminar personal (requiere `ADMINISTRATIVE_STAFF`)
+
+```bash
+curl -X POST http://localhost:8080/api/hr/staff/delete \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <token>' \
+  -d '{ "documentNumber": "1112223334" }'
+```
+
+5) Probar la autorización por roles
+
+- Si haces login con `rrhh` (rol `HUMAN_RESOURCES`) podrás llamar a `/staff/update` pero **no** a `/staff/delete` (deberías obtener 403).
+- Si haces login con `agarcia` (rol `ADMINISTRATIVE_STAFF`) podrás llamar a ambos endpoints.
+
+6) Probar expiración del token (5 minutos)
+
+- El token tiene `expiresIn` = 300000 ms (5 minutos). Espera 5 minutos y vuelve a intentar una llamada autenticada; la respuesta debería ser 401 con el cuerpo `{"error":"token_expired"}`.
+
+7) Depuración y errores comunes
+
+- `401 Unauthorized` al llamar endpoints: revisa que el header `Authorization` contenga `Bearer <token>` y que el token no haya expirado.
+- `403 Forbidden`: el token es válido pero el rol del usuario no tiene permiso para ese recurso (`@PreAuthorize`). Verifica el rol en la creación del usuario y/o el claim `roles` dentro del token.
+- Si tienes problemas al compilar por dependencias jjwt / security: corre `mvnw dependency:tree` y verifica que `jjwt` y `spring-boot-starter-security` estén presentes.
+
+Si quieres, agrego también colecciones de Thunder Client con los requests listos para importar (login, crear admin, crear rrhh, update, delete). ¿Quieres que las genere ahora?
+
+### Eliminar Personal
+
+**JSON ejemplo:**
+```json
+{
+  "documentNumber": "1112223334"
+}
+```
+
+**Curl:**
+```bash
+curl -X POST http://localhost:8080/api/hr/staff/delete \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "documentNumber": "1112223334"
+  }'
+```
