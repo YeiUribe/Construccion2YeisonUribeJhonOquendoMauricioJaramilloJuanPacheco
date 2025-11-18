@@ -18,15 +18,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/api/admin")
+/**
+ * Administrative endpoints.
+ * Access: only users with role `ADMINISTRATIVE_STAFF` may call these endpoints.
+ */
 public class AdministrativeController {
 
     @Autowired
     private AdministrativeUseCase administrativeUseCase;
 
     @PostMapping("/patients")
+    @PreAuthorize("hasRole('ADMINISTRATIVE_STAFF')")
+    // Requires role: ADMINISTRATIVE_STAFF
     public ResponseEntity<ApiResponse<PatientResponse>> registerPatient(@RequestBody PatientRequest request) {
         try {
             Patient patient = PatientMapper.fromRequest(request);
@@ -48,6 +55,8 @@ public class AdministrativeController {
     }
 
     @PostMapping("/invoices")
+    @PreAuthorize("hasRole('ADMINISTRATIVE_STAFF')")
+    // Requires role: ADMINISTRATIVE_STAFF
     public ResponseEntity<ApiResponse<InvoiceResponse>> generateInvoice(@RequestBody InvoiceRequest request) {
         try {
             Invoice invoiceData = InvoiceMapper.toDomain(request);

@@ -19,6 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/hr")
+/**
+ * Human Resources endpoints (hire, update, delete staff).
+ * - Hiring (`/staff`) is open (no specific role restriction in this flow).
+ * - Updating staff (`/staff/update`) requires `HUMAN_RESOURCES` or `ADMINISTRATIVE_STAFF`.
+ * - Deleting staff (`/staff/delete`) requires `ADMINISTRATIVE_STAFF`.
+ */
 public class HumanResourcesController {
 
     @Autowired
@@ -72,6 +78,7 @@ public class HumanResourcesController {
 
         @PostMapping("/staff/update")
         @org.springframework.security.access.prepost.PreAuthorize("hasRole('ADMINISTRATIVE_STAFF') or hasRole('HUMAN_RESOURCES')")
+        // Requires roles: ADMINISTRATIVE_STAFF OR HUMAN_RESOURCES
         public ResponseEntity<ApiResponse<UserResponse>> updateStaff(@RequestBody UserRequest request) {
             try {
                 // Validar campos igual que en hireStaff
@@ -106,6 +113,7 @@ public class HumanResourcesController {
 
         @PostMapping("/staff/delete")
         @org.springframework.security.access.prepost.PreAuthorize("hasRole('ADMINISTRATIVE_STAFF')")
+        // Requires role: ADMINISTRATIVE_STAFF
         public ResponseEntity<ApiResponse<Void>> deleteStaff(@RequestBody UserRequest request) {
             try {
                 String documentNumber = userValidator.documentValidator(request.getDocumentNumber());

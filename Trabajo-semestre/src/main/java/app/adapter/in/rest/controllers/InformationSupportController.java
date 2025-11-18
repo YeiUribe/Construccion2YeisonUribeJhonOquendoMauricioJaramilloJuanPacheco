@@ -24,15 +24,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/api/support")
+/**
+ * Information Support endpoints (inventory, insurances, diagnostic aids).
+ * Access: only users with role `INFORMATION_SUPPORT` may call these endpoints.
+ */
 public class InformationSupportController {
 
     @Autowired
     private InformationSupportUseCase informationSupportUseCase;
 
     @PostMapping("/medications")
+    @PreAuthorize("hasRole('INFORMATION_SUPPORT')")
+    // Requires role: INFORMATION_SUPPORT
     public ResponseEntity<ApiResponse<MedicationResponse>> createMedication(@RequestBody InventoryItemRequest request) {
         try {
             Medication med = MedicationMapper.toDomain(request);
@@ -50,6 +57,8 @@ public class InformationSupportController {
     }
     
     @PostMapping("/procedures")
+    @PreAuthorize("hasRole('INFORMATION_SUPPORT')")
+    // Requires role: INFORMATION_SUPPORT
     public ResponseEntity<ApiResponse<ProcedureResponse>> createProcedure(@RequestBody InventoryItemRequest request) {
         try {
             Procedure proc = ProcedureMapper.toDomain(request);
@@ -67,6 +76,8 @@ public class InformationSupportController {
     }
     
     @PostMapping("/diagnostic-aids")
+    @PreAuthorize("hasRole('INFORMATION_SUPPORT')")
+    // Requires role: INFORMATION_SUPPORT
     public ResponseEntity<ApiResponse<DiagnosticAidResponse>> createDiagnosticAid(@RequestBody InventoryItemRequest request) {
         try {
             DiagnosticAid aid = DiagnosticAidMapper.toDomain(request);
@@ -84,6 +95,8 @@ public class InformationSupportController {
     }
     
     @PostMapping("/insurances")
+    @PreAuthorize("hasRole('INFORMATION_SUPPORT')")
+    // Requires role: INFORMATION_SUPPORT
     public ResponseEntity<ApiResponse<InsuranceResponse>> createInsurance(@RequestBody InsuranceRequest request) {
         try {
             Insurance insurance = InsuranceMapper.fromRequest(request);

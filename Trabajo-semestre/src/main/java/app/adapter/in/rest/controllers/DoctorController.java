@@ -18,15 +18,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/api/doctor")
+/**
+ * Doctor endpoints.
+ * Access: only users with role `DOCTOR` may call these endpoints.
+ */
 public class DoctorController {
 
     @Autowired
     private DoctorUseCase doctorUseCase;
 
     @PostMapping("/clinical-records")
+    @PreAuthorize("hasRole('DOCTOR')")
+    // Requires role: DOCTOR
     public ResponseEntity<ApiResponse<ClinicalRecordResponse>> createRecord(@RequestBody ClinicalRecordRequest request) {
         try {
             ClinicalRecord record = ClinicalRecordMapper.fromRequest(request);
@@ -48,6 +55,8 @@ public class DoctorController {
     }
     
     @PostMapping("/clinical-orders")
+    @PreAuthorize("hasRole('DOCTOR')")
+    // Requires role: DOCTOR
     public ResponseEntity<ApiResponse<ClinicalOrderResponse>> createOrder(@RequestBody ClinicalOrderRequest request) {
         try {
             ClinicalOrder order = ClinicalOrderMapper.fromRequest(request);

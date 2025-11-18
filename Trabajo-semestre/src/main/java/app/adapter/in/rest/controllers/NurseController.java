@@ -14,15 +14,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/api/nurse")
+/**
+ * Nurse endpoints.
+ * Access: only users with role `NURSE` may call these endpoints.
+ */
 public class NurseController {
 
     @Autowired
     private NurseUseCase nurseUseCase;
 
     @PostMapping("/vitals")
+    @PreAuthorize("hasRole('NURSE')")
+    // Requires role: NURSE
     public ResponseEntity<ApiResponse<PatientVitalsResponse>> recordVitals(@RequestBody VitalsRequest request) {
         try {
             PatientVitals vitals = PatientVitalsMapper.fromRequest(request);

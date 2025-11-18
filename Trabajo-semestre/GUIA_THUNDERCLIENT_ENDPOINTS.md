@@ -1640,3 +1640,56 @@ curl -X POST http://localhost:8080/api/hr/staff/delete \
     "documentNumber": "1112223334"
   }'
 ```
+
+---
+
+## Curl rápidos: Autenticación y RRHH
+
+```bash
+# 1) Login (admin existente "agarcia")
+curl -X POST http://localhost:8080/api/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"agarcia","password":"SecurePass456!"}'
+
+# 2) Crear usuario RRHH (HUMAN_RESOURCES)
+curl -X POST http://localhost:8080/api/hr/staff \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "documentNumber": "222333444",
+    "fullName": "Usuario RRHH Ejemplo",
+    "email": "rrhh.ejemplo@hospital.com",
+    "phoneNumber": "3004445555",
+    "birthDate": "1992-02-02",
+    "address": "Calle Ejemplo 1",
+    "username": "rrhh_ej",
+    "password": "rrhhPass123",
+    "role": "HUMAN_RESOURCES"
+  }'
+
+# 3) Actualizar personal (requiere HUMAN_RESOURCES o ADMINISTRATIVE_STAFF)
+curl -X POST http://localhost:8080/api/hr/staff/update \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer <token>" \
+  -d '{
+    "documentNumber": "222333444",
+    "fullName": "Usuario RRHH Actualizado",
+    "phoneNumber": "3150001111",
+    "address": "Dirección Actualizada"
+  }'
+
+# 4) Eliminar personal (requiere ADMINISTRATIVE_STAFF)
+curl -X POST http://localhost:8080/api/hr/staff/delete \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer <token>" \
+  -d '{ "documentNumber": "222333444" }'
+
+# 5) Prueba negativa: login RRHH y tratar de eliminar (debe fallar con 403)
+curl -X POST http://localhost:8080/api/auth/login \
+  -H 'Content-Type: application/json' \
+  -d '{"username":"rrhh_ej","password":"rrhhPass123"}'
+
+curl -X POST http://localhost:8080/api/hr/staff/delete \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer <token_rrhh>" \
+  -d '{ "documentNumber": "222333444" }'
+```
